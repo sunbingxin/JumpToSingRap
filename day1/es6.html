@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      let obj={a:1};
+      Object.defineProperty(obj,"a",{
+         set(val){
+            console.log("Setval---",val)
+
+         },
+         get(val){
+             console.log("Getval---",val)
+         }
+      })
+
+      Object.defineProperty(obj,"a",{
+          writable:false, //是否可以修改a的值
+          configurable: false,//是否可以被删除
+          enumerable:false,//是否可以被枚举
+          value:"abc",//赋值
+      })
+      
+      function fun(url){
+           return new Promise((reslove,reject)=>{
+               let img=new Image();
+               img.src=url;
+               img.onload=function(){
+                   reslove(img)
+               }
+               img.onerror=function(){
+                   reject(new Error());
+               }
+           })
+      }
+      let url="http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg"
+      fun(url).then(res=>{
+        document.body.appendChild(res)
+      },err=>{
+        console.log(err);
+      }).then(res1=>{
+          console.log(res1);
+      },err1=>{
+         console.log(err1);
+      }).then(res2=>{
+          console.log(res2);
+      },err2=>{
+         console.log(res2);
+      })
+      
+    </script>
+</body>
+</html>
