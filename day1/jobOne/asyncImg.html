@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      let arr=[
+      "http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg",
+      "http://pic18.nipic.com/20120204/8339340_144203764154_2.jpg",
+      "http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg",
+      "http://pic40.nipic.com/20140331/9469669_142840860000_2.jpg",
+      "http://pic17.nipic.com/20111101/3094309_171235018306_2.jpg",
+      "http://pic9.nipic.com/20100827/5252423_161258496483_2.jpg",
+      ];
+      
+       function loader(url){
+          return new Promise((reslove,reject)=>{
+          let img=new Image();
+          img.src=url;
+
+          img.onload=function(){
+             reslove(img);
+          }
+          img.onerror=function(){
+             reject(new Error);
+          }
+      })
+     }
+      
+     async function loaderr() {
+        for(let i=0;i<arr.length;i++){
+        await loader(arr[i]).then(res=>{
+            document.body.appendChild(res);
+            console.log("按需加载-----"+new Date()*1)
+        })
+      }
+     }
+     loaderr();
+
+
+     setTimeout(()=>{
+
+        for(var j=0;j<arr.length;j++){
+        async function loaded() {
+            await loader(arr[j]).then(res=>{
+            document.body.appendChild(res);
+            console.log("一起加载-----"+new Date()*1)
+        })
+        }
+        loaded();
+        }
+        
+     },1000);
+   
+  
+    </script>
+</body>
+</html>
