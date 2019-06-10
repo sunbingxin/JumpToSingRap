@@ -1,14 +1,15 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
-import IndexPage from './views/IndexPage';
 import SpaMain from './views/SpaMain';
+import { Router, Route, Switch,Redirect } from 'dva/router';
+import Login from './views/login';
 
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={IndexPage} />
         <Route path="/main" exact component={SpaMain} />
+        <Route path="/login" exact component={Login} />
+        <Redirect path='/' to="/login"></Redirect>
       </Switch>
     </Router>
   );

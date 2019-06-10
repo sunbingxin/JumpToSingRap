@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {"a":1}
+        Object.defineProperty(obj,"a",{
+            get(val){
+                obj.a = 100
+                console.log('get--',val)
+            },
+            set(val){
+                console.log('set--',val)
+            }
+        }) 
+        Object.defineProperty(obj,"a",{
+            writable:false, //是否可以修改
+            configurable:false,  //是否可以被删除
+            enumerable:false,  //是否可以被枚举
+            value:1000  //设置value
+        })
+        function promise(src){
+            return new Promise((resolve,reject)=>{
+                let img = new Image()
+                img.src = src
+                img.onload = function(){
+                    resolve(img)
+                    return Promise.resolve('789')
+                }
+                img.onerror = function(e){
+                    reject(e)
+                    return Promise.reject(new Error('46'))
+                }
+            })
+        }
+        let src = 'https://www.baidu.com/img/bd_logo1.png'
+        promise(src).then((res)=>{
+            document.body.appendChild(res)
+        },(err)=>{
+            console.log(err)
+        }).then((res1)=>{
+            console.log(res1)
+        },(err1)=>{
+            console.log(err1)
+        })
+    </script>
+</body>
+</html>
