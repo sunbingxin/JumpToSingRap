@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './SpaMain.css';
-import { Menu} from 'antd';
+import { Menu,Collapse} from 'antd';
+const Panel = Collapse.Panel;
 function IndexPage() {
   return (
     <div className={styles.minBox}>
@@ -20,13 +21,41 @@ function IndexPage() {
            </div>
        </div>
       <div className={styles.mainSection}>
-         <div></div>
+         <div className={styles.mainSectionLeft}>
+          <Collapse expandIconPosition="right" id={styles.mainSectionLeftOne}>
+           <Panel header="考试管理" key="1">
+          <p><a>添加试题</a></p>
+          <p><a>试题分类</a></p>
+          <p><a>查看试题</a></p>
+          </Panel>
+          <Panel header="用户管理" key="2">
+          <p><a>添加用户</a></p>
+          <p><a>用户展示</a></p>
+          </Panel>
+          <Panel header="考试管理" key="3">
+          <p><a>添加考试</a></p>
+          <p><a>试卷列表</a></p>
+          </Panel>
+          <Panel header="班级管理" key="4">
+          <p><a>班级管理</a></p>
+          <p><a>学生管理</a> </p>
+          <p><a>教室管理</a></p>  
+          </Panel>
+          <Panel header="阅卷管理" key="5">
+          <p><a href="#">待批班级</a></p>
+          </Panel>
+          </Collapse>,
+         </div>
+         <div className={styles.mainSectionRight}>
+           <div></div> 
+         </div>
       </div>
     </div>
   );
 }
 
 IndexPage.propTypes = {
+  
 };
 
 export default connect()(IndexPage);

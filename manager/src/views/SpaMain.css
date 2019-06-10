@@ -45,3 +45,21 @@
     width: 100%;
     top: 65px;
 }
+.mainSection{
+    flex: 1;
+    display: flex;
+}
+.mainSectionLeft{
+    flex: 2;
+}
+.mainSectionLeft a{
+    display: block;
+    color: #999;
+}
+.mainSectionLeft a:hover{
+    color:blue;
+}
+.mainSectionRight{
+    flex: 8;
+    background: black;
+}
