@@ -1,10 +1,9 @@
-import request from '../utils/request';
+import request from "../utils/request"
 
-export function login(data) {
-  console.log(data)
+export function login(params){
   return request({
-    url:'/user/login',
-    method:'POST',
-    data:data
-  });
+      url:"/user/login",
+      method:"POST",
+      data:params,
+  })
 }

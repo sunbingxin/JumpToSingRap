@@ -1,4 +1,5 @@
-import {login} from '../services'
+import {login} from "../services";
+
 export default {
     // 命名空间
     namespace: 'user',
@@ -13,11 +14,10 @@ export default {
   
     // 异步操作
     effects: {
-        *logins({payloag},{call,put}){
-            console.log('payloa...',payloag,login)
-            let data = yield call(login,payloag)
-            console.log('data..',data)
-        },
+    *login({ payload },{ call, put }){
+        let data = yield call(login,payload);
+        console.log(data);
+    },
       *fetch({ payload }, { call, put }) {  // eslint-disable-line
         yield put({ type: 'save' });
       },
@@ -28,6 +28,7 @@ export default {
       save(state, action) {
         return { ...state, ...action.payload };
       },
+      
     },
   
   };

@@ -1,27 +1,23 @@
-import axios from 'axios'
+import axios from "axios";
 
-// create an axios instance
-const service = axios.create({
-  baseURL: 'http://169.254.78.4:7001/',
-  // withCredentials: true, // 跨域请求时发送 cookies
-  timeout: 5000 // request timeout
+const service=axios.create({
+  baseURL:"http://127.0.0.1:7001/",
+  timeout:5000,
 })
 
-// request interceptor
 service.interceptors.request.use(
-  config => {
+  config=>{
     return config
   },
-  error => {
-    return Promise.reject(error)
+  err=>{
+    return Promise.reject(err);
   }
 )
 
-// response interceptor
 service.interceptors.response.use(
-  response => response.data,
-  error => {
-    return Promise.reject(error)
+  response=>response.data,
+  err=>{
+    return Promise.reject(err);
   }
 )
 
