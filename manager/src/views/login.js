@@ -16,7 +16,7 @@ class IndexPage extends Component {
           <Form.Item className={styles.input1}>
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Username"
+                placeholder="请输入用户名"
                 onChange={this.change_username}
               />
           </Form.Item>
@@ -24,15 +24,17 @@ class IndexPage extends Component {
               <Input
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
-                placeholder="Password"
+                placeholder="请输入密码"
                 onChange={this.change_userpwd}
               />
           </Form.Item>
           <Form.Item className={styles.btn}>
+            <div className={styles.flex}>
             <Checkbox>记住密码</Checkbox>
             <a className="login-form-forgot" href="">
               忘记密码
             </a>
+            </div>
           </Form.Item>
           <Form.Item  className={styles.btns}>
             <Button type="primary" htmlType="submit" className="login-form-button"  className={styles.button}>

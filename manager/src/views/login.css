@@ -2,7 +2,7 @@
 .warp{
   width: 100%;
   height:100%;
-  background: blue;
+  background: rgb(0, 0, 128);
 }
 .box{
   width: 350px;
@@ -11,8 +11,8 @@
   line-height: 300px;
   border-radius: 10px;
   position: absolute;
-  bottom: 20%;
-  right: 5%;
+  top: 25%;
+  left: 64%;
 }
 .input1{
   width: 90%;
@@ -35,11 +35,14 @@
 }
 .btns{
   width: 90%;
-  text-align: center;
   position: absolute;
   left: 5%;
   top: 15%;
 }
+.flex{
+  display:flex;
+  justify-content: space-between;
+}
 .button{
-  width: 90%;
+  width: 100%;
 }
