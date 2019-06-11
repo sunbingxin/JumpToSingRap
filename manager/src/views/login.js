@@ -11,7 +11,9 @@ function LoginPage(props){
       user_pwd:"Chenmanjie123!",
     })
   },[]);
-
+  useState(()=>{
+    
+  })
   let handleSubmit = e => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
