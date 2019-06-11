@@ -5,12 +5,12 @@ import React, { useEffect,useState } from 'react'
 
 function LoginPage(props){
   let {login}=props;
-  useEffect(()=>{
-    login({
-      user_name:"chenmanjie",
-      user_pwd:"Chenmanjie123!",
-    })
-  },[]);
+  // useEffect(()=>{
+  //   login({
+  //     user_name:"chenmanjie",
+  //     user_pwd:"Chenmanjie123!",
+  //   })
+  // },[]);
   useState(()=>{
     
   })
