@@ -42,7 +42,7 @@ function IndexPage() {
           <p><a>教室管理</a></p>  
           </Panel>
           <Panel header="阅卷管理" key="5">
-          <p><a href="#">待批班级</a></p>
+          <p><a href="">待批班级</a></p>
           </Panel>
           </Collapse>,
          </div>

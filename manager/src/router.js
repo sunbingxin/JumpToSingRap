@@ -2,7 +2,7 @@ import React from 'react';
 import SpaMain from './views/SpaMain';
 import { Router, Route, Switch,Redirect } from 'dva/router';
 import Login from './views/login';
-
+import 'antd/dist/antd.css'; 
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
