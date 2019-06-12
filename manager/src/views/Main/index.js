@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu } from 'antd';
 import styles from  "./index.css"
-import {Route,Link} from 'dva/router';
+import {Route,Switch} from 'dva/router';
 
+import Menuitem from "../../components/MenuItem"
 import Add from "./Exam/add/index"
 import Classify from "./Exam/classify/index"
 import Test from "./Exam/test/index"
 
-const { SubMenu } = Menu;
+
 const { Header,Sider } = Layout;
 
 function IndexPage() {
@@ -29,38 +30,14 @@ function IndexPage() {
        </Header>
        <div className={styles.center}>
        <Sider style={{height:"100%"}}>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%' }}
-          >
-            <SubMenu
-              key=""
-              title={
-                <span>
-                  <Icon type="user" />
-                  考试管理
-                </span>
-              }
-            >
-              <Menu.Item key="1">
-              <Link to="/exam/add">添加试题</Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-              <Link to="/exam/classify">试题分类</Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-              <Link to="/exam/test">查看试题</Link>
-              </Menu.Item>
-            </SubMenu>
-          </Menu>
+         <Menuitem></Menuitem>
         </Sider>
-        
           <div>
+          <Switch>
            <Route path="/exam/add" component={Add}></Route>
            <Route path="/exam/classify" component={Classify}></Route>
            <Route path="/exam/test" component={Test}></Route>
+           </Switch>
           </div>
        </div>
        

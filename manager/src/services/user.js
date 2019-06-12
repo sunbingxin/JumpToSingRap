@@ -7,3 +7,9 @@ export function login(params){
       data:params,
   })
 }
+
+export function exam(){
+  return request({
+    url:"/exam/getQuestionsType"
+  })
+}

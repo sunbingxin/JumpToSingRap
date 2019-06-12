@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken } from "./Cookie";
 
 const service=axios.create({
   baseURL:"http://127.0.0.1:7001/",
@@ -7,6 +8,9 @@ const service=axios.create({
 
 service.interceptors.request.use(
   config=>{
+    if(getToken()){
+      config.headers['statusCode'] = getToken()
+    }
     return config
   },
   err=>{

@@ -1,4 +1,4 @@
-import {login} from "../services";
+import {login,exam} from "../services";
 import {getToken,setToken} from "../utils/Cookie";
 import {routerRedux} from "dva/router"
 export default {
@@ -40,6 +40,12 @@ export default {
         }
         yield put({ type: 'save' , payload:data.code===1?1:-1});
     },
+
+    *exam({ payload },{ call, put }){
+      let data = yield call(exam);
+      console.log(data);
+      yield put({type:"examSave",payload:1})
+  },
     },
   
     // 同步操作
@@ -47,6 +53,10 @@ export default {
       save(state, {payload}) {
         return { ...state, isLoad:payload };
       },
+      examSave(state, actions) {
+        console.log(actions);
+        return { ...state, isArr:true };
+      }
       
     },
   
