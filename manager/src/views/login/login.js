@@ -1,25 +1,30 @@
 
 import { connect } from 'dva';
 import styles from './login.scss';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox ,message } from 'antd';
 import 'antd/dist/antd.css'; // or 
 import React, {useState,useEffect}from 'react'
 function IndexPage(props){
    // 获取login
   let {login} = props;
+  
   useEffect(()=>{
-    // login({
-    //   user_name: 'chenmanjie',
-    //   user_pwd: 'Chenmanjie123!'
-    // })
-  }, []);
+    if(props.isLogin === 1){
+      message.success('登陆成功')
+      let pathname = decodeURIComponent(props.history.location.search.split('=')[1])
+      console.log(pathname,props)
+      props.history.replace(pathname)
+    }else{
+      message.error('账号密码错误')
+    }
+  }, [props.isLogin]);
 
   // 处理表单提交
   let handleSubmit = e => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log(props);
         // 调登录接口
         login({
           user_name: values.username,
@@ -39,7 +44,7 @@ function IndexPage(props){
       })(
         <Input
           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-          placeholder="Username"
+          placeholder="请输入用户名"
         />,
       )}
     </Form.Item>
@@ -50,7 +55,7 @@ function IndexPage(props){
         <Input
           prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
           type="password"
-          placeholder="Password"
+          placeholder="请输入密码"
         />,
       )}
     </Form.Item>
@@ -58,14 +63,13 @@ function IndexPage(props){
       {getFieldDecorator('remember', {
         valuePropName: 'checked',
         initialValue: true,
-      })(<Checkbox>Remember me</Checkbox>)}
+      })(<Checkbox>记住密码</Checkbox>)}
       <a className="login-form-forgot" href="">
-        Forgot password
+        忘记密码
       </a>
       <Button type="primary" htmlType="submit" className="login-form-button">
-        Log in
+        登陆
       </Button>
-      Or <a href="">register now!</a>
     </Form.Item>
   </Form>;
   </div>
@@ -80,16 +84,18 @@ IndexPage.defaultProps = {
 
 }
 let mapStateToProps = state=>{
-  console.log('state...',state)
-  return {}
+
+  return {
+    ...state.user
+  }
 }
 let mapDispatchToProps = dispatch=>{
   return {
-    login(payloag){
-      console.log(payloag)
+    login(payload){
+      console.log(payload)
       dispatch({
         type:'user/logins',
-        payloag
+        payload
       })
     }
   }

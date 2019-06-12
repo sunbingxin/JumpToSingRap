@@ -44,11 +44,7 @@
     position: absolute;
     width: 100%;
     top: 65px;
-<<<<<<< HEAD
-    left: 0;
-=======
     left: 0px;
->>>>>>> dev
 }
 .mainSection{
     flex: 1;
