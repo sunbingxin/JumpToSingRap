@@ -44,6 +44,7 @@
     position: absolute;
     width: 100%;
     top: 65px;
+    left: 0px;
 }
 .mainSection{
     flex: 1;
