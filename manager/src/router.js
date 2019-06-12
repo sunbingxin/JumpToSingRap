@@ -1,5 +1,5 @@
 import React from 'react';
-import SpaMain from './views/Main/SpaMain';
+import SpaMain from './views/Main/index';
 import { Router, Route, Switch,Redirect } from 'dva/router';
 import Login from './views/Logo/login';
 import 'antd/dist/antd.css'; 
@@ -7,9 +7,8 @@ function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/main" exact component={SpaMain} />
-        <Route path="/login" exact component={Login} />
-        <Redirect path='/' to="/login"></Redirect>
+        <Route path="/login" exact component={Login}/>
+        <Route path="/" exact component={SpaMain}/>
       </Switch>
     </Router>
   );

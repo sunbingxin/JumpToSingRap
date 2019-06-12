@@ -1,23 +1,25 @@
 import { connect } from 'dva';
 import styles from './login.scss';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import React, { useEffect,useState } from 'react'
 
 function LoginPage(props){
-  let {login} = props;
   useEffect(()=>{
-    // login({
-    //   user_name: 'chenmanjie',
-    //   user_pwd: 'Chenmanjie123!'
-    // })
-  }, []);
+    if(props.isLoad === 1){
+      message.success('登陆成功');
+     let pathname = decodeURIComponent(props.history.location.search.split("=")[1])
+     props.history.replace(pathname);
+    }else if(props.isLoad === -1){
+      message.error ('登陆失败');
+    }
+  },[props.isLoad]);
 
   // 处理表单提交
   let handleSubmit = e => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        let {login} = props;
         // 调登录接口
         login({
           user_name: values.username,
@@ -78,7 +80,7 @@ LoginPage.defaultProps={
 }
 
 const mapStateTopProps=state=>{
-  return {}
+  return state.user
 }
 const mapDispatchTopProps=dispatch=>{
   return {
