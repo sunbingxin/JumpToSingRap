@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {getTooken,setTooken} from '../utils/cookie'
+import {getTooken,setTooken} from './cookie'
 
 const service = axios.create({
   baseURL: 'http://169.254.78.156:7001/',

@@ -13,7 +13,7 @@ function IndexPage(props){
       message.success('登陆成功')
       let pathname = decodeURIComponent(props.history.location.search.split('=')[1])
       console.log(pathname,props)
-      props.history.replace(pathname)
+      props.history.replace('/')
     }else{
       message.error('账号密码错误')
     }

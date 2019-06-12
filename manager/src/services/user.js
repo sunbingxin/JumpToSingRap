@@ -1,4 +1,5 @@
 import request from '../utils/request';
+import { getTooken } from '../utils/cookie';
 
 export function login(data) {
   console.log(data)
@@ -7,4 +8,9 @@ export function login(data) {
     method:'POST',
     data:data
   });
+}
+export function classify(){
+  return request({
+    url:'/exam/getQuestionsType'
+  })
 }

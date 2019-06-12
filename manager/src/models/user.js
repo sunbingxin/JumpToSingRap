@@ -1,4 +1,4 @@
-import {login} from '../services'
+import {login,classify} from '../services'
 import {getTooken,setTooken} from '../utils/cookie'
 import { routerRedux } from 'dva/router';
 export default {
@@ -39,6 +39,12 @@ export default {
             }
             yield put({type:'save',payload:data.code===1?1:-1})
         },
+        *classify({payload},{call,put}){
+          console.log(classify)
+          let data = yield call(classify)
+          console.log(data)
+          yield put({type:'classify',payload:data})
+        }
       // *fetch({ payload }, { call, put }) {  // eslint-disable-line
       //   yield put({ type: 'save' });
       // },
@@ -48,6 +54,9 @@ export default {
     reducers: {
       save(state, {payload}) {
         return { ...state,isLogin:payload };
+      },
+      classify(state, {payload}) {
+        return { ...state,data:payload };
       },
     },
   

@@ -1,66 +1,51 @@
-.minBox{
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
 .minHeard{
-    height: 64px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,.19)!important;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+  background: #fff;
 }
 .minHeard>div:hover{
-    background:#ccc;
+  background:#ccc;
 }
 
 .minHeard>div:hover .mainMenu{
-    display: block;
+  display: block;
 }
 .minHeard>img{
-    width: 120px;
-    height: 30px;
+  width: 120px;
+  height: 30px;
 }
 .minHeard>div{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-family: "楷体";
-    position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-family: "楷体";
+  position: relative;
 }
 .minHeard>div>img{
-    border-radius: 100%;
-    width: 32px;
-    height: 32px;
-    margin-right: 5px;
+  border-radius: 100%;
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
 }
 .mainMenu{
-    display: none;
-    position: absolute;
-    width: 100%;
-    top: 65px;
-    left: 0px;
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 65px;
+  left: 0px;
 }
-.mainSection{
-    flex: 1;
-    display: flex;
+.center{
+  display: flex;
+  height: 100%;
 }
-.mainSectionLeft{
-    flex: 2;
+.center>div:nth-child(2){
+  flex: 1;
 }
-.mainSectionLeft a{
-    display: block;
-    color: #999;
-}
-.mainSectionLeft a:hover{
-    color:blue;
-}
-.mainSectionRight{
-    flex: 8;
-    background: black;
+.ant-layout-header{
+  background: #ccc;
 }
