@@ -1,13 +1,13 @@
-.login_form {
-  max-width: 300px;
-}
-
-.login-form-forgot {
-  float: right;
-}
-
-.login-form-button {
-  width: 100%;
+:global{
+  .login-form {
+    max-width: 300px;
+  }
+  .login-form-forgot {
+    float: right;
+  }
+  .login-form-button {
+    width: 100%;
+  }
 }
 .warp{
   width: 100%;
@@ -28,14 +28,20 @@
   width: 90%;
   position: absolute;
   left: 5%;
-  top: 5%;
+  top: 15%;
+}
+.input2{
+  width: 90%;
+  position: absolute;
+  left: 5%;
+  top: 30%;
 }
 .btn{
   width: 90%;
   text-align: center;
   position: absolute;
   left: 5%;
-  top:15%;
+  top:45%;
 }
 .btns{
   width: 90%;
@@ -49,4 +55,8 @@
 }
 .button{
   width: 90%;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,12 +1,12 @@
-.login_form {
+:global .login-form {
   max-width: 300px;
 }
 
-.login-form-forgot {
+:global .login-form-forgot {
   float: right;
 }
 
-.login-form-button {
+:global .login-form-button {
   width: 100%;
 }
 
@@ -31,7 +31,14 @@
   width: 90%;
   position: absolute;
   left: 5%;
-  top: 5%;
+  top: 15%;
+}
+
+.input2 {
+  width: 90%;
+  position: absolute;
+  left: 5%;
+  top: 30%;
 }
 
 .btn {
@@ -39,7 +46,7 @@
   text-align: center;
   position: absolute;
   left: 5%;
-  top: 15%;
+  top: 45%;
 }
 
 .btns {
@@ -56,4 +63,9 @@
 
 .button {
   width: 90%;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
 }
