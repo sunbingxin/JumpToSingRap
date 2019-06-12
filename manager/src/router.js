@@ -1,7 +1,7 @@
 import React from 'react';
-import SpaMain from './views/SpaMain';
+import SpaMain from './views/Main/SpaMain';
 import { Router, Route, Switch,Redirect } from 'dva/router';
-import Login from './views/login';
+import Login from './views/Logo/login';
 import 'antd/dist/antd.css'; 
 function RouterConfig({ history }) {
   return (
