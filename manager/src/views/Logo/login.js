@@ -78,17 +78,22 @@ LoginPage.defaultProps={
   
 }
 
-const mapStateTopProps=state=>{
-  return state.user
+
+let mapStateTopProps = state=>{
+
+  return {
+    ...state.user
+  }
 }
-const mapDispatchTopProps=dispatch=>{
+let mapDispatchToProps = dispatch=>{
   return {
     login(payload){
+      console.log(payload)
       dispatch({
-        type:"user/login",
-        payload,
+        type:'user/logins',
+        payload
       })
     }
   }
 }
-export default connect(mapStateTopProps,mapDispatchTopProps)((Form.create())(LoginPage));
+export default connect(mapStateTopProps,mapDispatchToProps)((Form.create())(LoginPage));

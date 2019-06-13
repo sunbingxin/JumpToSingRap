@@ -1,0 +1,50 @@
+.minHeard{
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,.19)!important;
+}
+.minHeard>div:hover{
+    background:#ccc;
+}
+
+.minHeard>div:hover .mainMenu{
+    display: block;
+}
+.minHeard>img{
+    width: 120px;
+    height: 30px;
+}
+.minHeard>div{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-family: "楷体";
+    position: relative;
+}
+.minHeard>div>img{
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+}
+.mainMenu{
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 65px;
+    left: 0px;
+}
+.center{
+    display: flex;
+}
+.center>div:nth-child(2){
+    flex: 1;
+}
+.mainDiv{
+    overflow-y: auto;
+}

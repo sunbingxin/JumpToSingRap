@@ -6,25 +6,22 @@ const service = axios.create({
   timeout: 5000
 })
 
-// request interceptor
 service.interceptors.request.use(
-  config => {
-    if (getTooken()) {
-      // 让每个请求携带authorization
-      config.headers['loginTooken'] = getTooken()
+  config=>{
+    if(getToken()){
+      config.headers['Authorization'] = getToken()
     }
     return config
   },
-  error => {
-    return Promise.reject(error)
+  err=>{
+    return Promise.reject(err);
   }
 )
 
-// response interceptor
 service.interceptors.response.use(
-  response => response.data,
-  error => {
-    return Promise.reject(error)
+  response=>response.data,
+  err=>{
+    return Promise.reject(err);
   }
 )
 
