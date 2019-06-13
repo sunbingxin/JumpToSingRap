@@ -34,13 +34,13 @@ const columns = [
   ];
 function Look(props) {
   let {getExamTitle,addExam,strAll,styleExam1,styleExam2,styleExam3}=props;
-  console.log(styleExam1,styleExam2,styleExam3,"111111111111111111111");
    useEffect(()=>{
       if(!strAll){
         getExamTitle();
+      }
+      if(!styleExam1.length||!styleExam2.length||!styleExam3.length){
         addExam();
       }
-      console.log(strAll);
    },[strAll,styleExam2,styleExam1,styleExam3])
    const [select1, setSelect1] = useState("");
    const [select2, setSelect2] = useState("");
@@ -49,7 +49,6 @@ function Look(props) {
         <Layout style={{ padding: '0 24px 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>试题分类</Breadcrumb.Item>
-
             </Breadcrumb>
             <Content
                 style={{
@@ -65,7 +64,7 @@ function Look(props) {
                     <Col span={18}>
                         <div>
                           {
-                            styleExam2&&styleExam2.map(item=><MyTag>{item.exam_name}</MyTag>)
+                            styleExam2&&styleExam2.map((item,index)=><MyTag key={index}>{item.subject_text}</MyTag>)
                           }
                         </div>
                     </Col>
@@ -73,20 +72,20 @@ function Look(props) {
                 <Row>
                     <Col lg={{ span: 6, offset: 2 }} span={8} >
                         考试类型:  <Select 
-                        defaultValue="周考1" 
+                        defaultValue="" 
                         style={{ width: 120}} 
                         value={select2}
                          onChange={(e)=>{
                            setSelect2(e);
                            }}>
    {
-     styleExam1&&styleExam1.map(item=><Option key="index"  value={item.subject_id}>{item.subject_text}</Option>)
+     styleExam1.map((item,index)=><Option key={index} value={item.exam_id}>{item.exam_name}</Option>)
    }
    </Select>
                     </Col>
 
                     <Col span={8}>题目类型:<Select
-                        defaultValue="简答题"
+                        defaultValue=""
                         style={{ width: 120 }}
                         dropdownRender={menu => (
                             <div>
@@ -94,9 +93,9 @@ function Look(props) {
                             </div>
                         )}
                     >
-                          {
-                             styleExam3&&styleExam3.map(item=><Option key="index" value={item.exam_id}>{item.exam_name}</Option>)
-                          }
+                         {
+     styleExam3&&styleExam3.map((item,index)=><Option  key={index} value={item.questions_type_id}>{item.questions_type_text}</Option>)
+   }
                     </Select></Col>
                     <Col span={8}>
                         <Button className={style.btn} type="primary">
@@ -104,7 +103,7 @@ function Look(props) {
                     </Button>
                     </Col>
                 </Row>
-                <Table className={style.table} columns={columns} dataSource={strAll} />
+                <Table  className={style.table} columns={columns} dataSource={strAll} />
             </Content>
         </Layout>
     )
