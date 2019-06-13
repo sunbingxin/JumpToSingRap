@@ -9,7 +9,7 @@ const service=axios.create({
 service.interceptors.request.use(
   config=>{
     if(getToken()){
-      config.headers['statusCode'] = getToken()
+      config.headers['Authorization'] = getToken()
     }
     return config
   },

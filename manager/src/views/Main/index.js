@@ -32,7 +32,7 @@ function IndexPage() {
        <Sider style={{height:"100%"}}>
          <Menuitem></Menuitem>
         </Sider>
-          <div>
+          <div className={styles.mainDiv}>
           <Switch>
            <Route path="/exam/add" component={Add}></Route>
            <Route path="/exam/classify" component={Classify}></Route>

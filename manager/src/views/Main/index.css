@@ -45,3 +45,6 @@
 .center>div:nth-child(2){
     flex: 1;
 }
+.mainDiv{
+    overflow-y: auto;
+}

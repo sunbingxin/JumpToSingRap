@@ -10,6 +10,7 @@ export function login(params){
 
 export function exam(){
   return request({
-    url:"/exam/getQuestionsType"
+    url:"/exam/getQuestionsType",
+    method:"GET"
   })
 }

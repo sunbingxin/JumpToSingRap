@@ -8,6 +8,8 @@ export default {
     // 模块内部的状态
     state: {
       isLoad:0,
+      isArr:[],
+      isChoos:false,
     },
   
     subscriptions: {
@@ -21,7 +23,6 @@ export default {
              }
           }else{
              if(getToken()){
-               console.log(123);
               dispatch(routerRedux.replace({
                 pathname:"/"
               }))
@@ -43,9 +44,12 @@ export default {
 
     *exam({ payload },{ call, put }){
       let data = yield call(exam);
-      console.log(data);
-      yield put({type:"examSave",payload:1})
+      yield put({type:"examSave",payload:data})
   },
+
+  *ischoose({payload},{call,put}){
+    yield put({type:"IsChoose",payload})
+  }
     },
   
     // 同步操作
@@ -53,9 +57,11 @@ export default {
       save(state, {payload}) {
         return { ...state, isLoad:payload };
       },
-      examSave(state, actions) {
-        console.log(actions);
-        return { ...state, isArr:true };
+      examSave(state, {payload}) {
+        return { ...state, isArr:payload.code===1?payload.data:[] };
+      },
+      IsChoose(state,{payload}){
+        return {...state, isChoos:payload}
       }
       
     },
