@@ -57,3 +57,11 @@ export function searChget(params){
     method:"GET",
   })
 }
+
+export function addTextAll(params){
+  console.log(params);
+ return request({
+   url:"/exam/insertQuestionsType?text="+params.text+"&sort="+params.sort,
+   method:"GET",
+ })
+}

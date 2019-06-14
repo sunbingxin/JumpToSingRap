@@ -6,13 +6,16 @@ import {Link} from "dva/router"
 const { Content } = Layout;
 const { Option } = Select;
 const { CheckableTag } = Tag;
-const columns = [
+const columns = function(props){
+  return [
     {
       dataIndex: '',
       exam_name:"",
       key: 'name', 
       render: text => (
-        <>
+        <div onClick={()=>{
+          props.history.push("/exam/detail?id="+text.questions_id)
+        }} >
             <h4>{text.title}</h4>
             <h4>
                 <Tag color="blue">{text.questions_type_text}</Tag>
@@ -21,18 +24,19 @@ const columns = [
             </h4>
             <a href="">{text.user_name}</a>
             <a href="">发布</a>
-        </>
+        </div>
       ),
     },
     {
       key: 'action',
       render: (text, record) => (
         <span style={{position:"absolute",right:20}}>
-          <Link to={`/exam/add?id=${text.exam_id}`}>编辑</Link>
+          <Link to={`/exam/add?id=${text.questions_id}`}>编辑</Link>
         </span>
       ),
     },
-  ];
+  ]
+};
 function Look(props) {
   let {getExamTitle,addExam,strAll,styleExam1,styleExam2,styleExam3,searchget}=props;
    useEffect(()=>{
@@ -43,6 +47,7 @@ function Look(props) {
         addExam();
       }
    },[strAll,styleExam2,styleExam1,styleExam3])
+   console.log(strAll);
    const [select1, setSelect1] = useState("");
    const [select2, setSelect2] = useState("");
    const [select3, setSelect3] = useState("");
@@ -105,7 +110,7 @@ function Look(props) {
                     </Button>
                     </Col>
                 </Row>
-                <Table  className={style.table} columns={columns} dataSource={strAll} />
+                <Table  className={style.table} columns={columns(props)} dataSource={strAll} />
             </Content>
         </Layout>
     )

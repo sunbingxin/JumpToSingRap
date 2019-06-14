@@ -1,10 +1,12 @@
-import React ,{useEffect} from 'react';
+import React ,{useEffect,useState} from 'react';
 import { connect} from 'dva';
-import { Layout, Breadcrumb,Button,Table ,Modal,Input} from 'antd';
+import { Layout, Breadcrumb,Button,Table ,Modal,Input,message} from 'antd';
 const { Content } = Layout;
+
 function IndexPage(props) {
-  let {addExam,isArr,isChoos,changeIsChoose}=props;
-  let valu="";
+  let {addExam,isArr,isChoos,addText,isCode}=props;
+  let [state,setState]=useState(false);
+  let [value,setValue]=useState("");
   const columns = [
     {
       title: '类型ID',
@@ -19,24 +21,24 @@ function IndexPage(props) {
       dataIndex: 'questions_type_sort',
     },
   ];
-
-  function fun(){
-    changeIsChoose(true)
-  };
-  function handleCancel(){
-    changeIsChoose(false)
-  };
   function handleOk(){
-    setTimeout(() => {
-      changeIsChoose(false)
-    }, 1000);
-    console.log(valu)
-  };
+    console.log("ok");
+    addText({
+      text:value,
+      sort:(Math.random()+"").substr(2,8)
+    })
+    setState(false)
+  }
   useEffect(()=>{
     if(!isArr.length){
       addExam();
     }
-  },[isArr,isChoos])
+    if(isCode===1){
+      message.success("添加试题类型成功")
+    }else if(isChoos===-1){
+      message.error("添加试题类型失败")
+    }
+  },[isArr,isChoos,isCode])
   return  <Layout style={{ padding: '0 24px 24px' }}>
   <Breadcrumb style={{ margin: '16px 0' }}>
     <Breadcrumb.Item>试题分类</Breadcrumb.Item>
@@ -49,19 +51,24 @@ function IndexPage(props) {
       minHeight: 280,
     }}
   >
-    <Button type="primary" icon="plus" onClick={fun}>
+    <Button type="primary" icon="plus" onClick={()=>{
+      setState(true)
+    }}>
       添加类型
     </Button>
     <Table dataSource={isArr} columns={columns} />;
-
     <Modal
-          title="Title"
-          onOk={handleOk}
-          onCancel={handleCancel}
-          visible={isChoos}
-        >
-          <Input placeholder="Basic usage" defaultValue={valu}/>
-        </Modal>
+      title="请输入您要填写的试题"
+      visible={state}
+      onCancel={()=>{
+        setState(false)
+      }}
+      onOk={handleOk}
+      >
+     <Input placeholder="请添加试题" defaultValue={value} onChange={(e)=>{
+      setValue(e.target.value)
+     }} />
+     </Modal>
   </Content>
 </Layout>;
 }
@@ -77,9 +84,9 @@ let mapdispatchToProps=dispatch=>{
         type:"user/exam",
       })
     },
-    changeIsChoose(payload){
+    addText(payload){
       dispatch({
-        type:"user/ischoose",
+        type:"user/gettext",
         payload,
       })
     }

@@ -9,7 +9,7 @@ const { Option } = Select;
 function filterOne(str,pathname){
   str=str===undefined?[]:str;
   return  str.find(item=>{
-    return item.exam_id===pathname
+    return item.questions_id===pathname
   })
  
 }

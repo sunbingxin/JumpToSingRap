@@ -9,6 +9,7 @@ import Menuitem from "../../components/MenuItem"
 import Add from "./Exam/add/index"
 import Classify from "./Exam/classify/index"
 import Test from "./Exam/test/index"
+import Detail from "./Exam/detail/index"
 
 
 const { Header,Sider } = Layout;
@@ -38,6 +39,7 @@ function IndexPage(props) {
           { global? <div className={styles.spin}> <Spin /></div>:null}
           <Switch>
            <Route path="/exam/add" component={Add}></Route>
+           <Route path="/exam/detail" component={Detail}></Route>
            <Route path="/exam/classify" component={Classify}></Route>
            <Route path="/exam/test" component={Test}></Route>
            </Switch>
