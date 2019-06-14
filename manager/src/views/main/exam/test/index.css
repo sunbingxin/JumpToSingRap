@@ -7,3 +7,9 @@
 .table td{
     line-height: 30px;
 }
+.row .rowleft{
+    width: 10%;
+}
+.row .rowrigint{
+    width: 90%;
+}

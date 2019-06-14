@@ -1,9 +1,9 @@
-import axios from 'axios'
-import {getTooken,setTooken} from './cookie'
+import axios from "axios";
+import { getToken } from "./Cookie";
 
-const service = axios.create({
-  baseURL: 'http://169.254.78.156:7001/',
-  timeout: 5000
+const service=axios.create({
+  baseURL:"http://127.0.0.1:7001/",
+  timeout:5000,
 })
 
 service.interceptors.request.use(

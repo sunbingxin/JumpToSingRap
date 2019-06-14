@@ -2,9 +2,17 @@ import React ,{useEffect,useState} from 'react';
 import { connect } from 'dva';
 import { Layout, Breadcrumb,Input,Select,Button,message } from 'antd';
 import Editor from 'for-editor'
-import "./index.scss"
+import styles from "./index.css"
 const { Content } = Layout;
 const { Option } = Select;
+
+function filterOne(str,pathname){
+  str=str===undefined?[]:str;
+  return  str.find(item=>{
+    return item.questions_id===pathname
+  })
+ 
+}
 
 function IndexPage(props) {
   let {getAll,styleExam1,styleExam2,styleExam3,obj,setExam,hint}=props;
@@ -14,6 +22,10 @@ function IndexPage(props) {
   const [select1, setSelect1] = useState("");
   const [select2, setSelect2] = useState("");
   const [select3, setSelect3] = useState("");
+
+  const pathname=decodeURIComponent(props.history.location.search.split("=")[1]);
+  const arr= filterOne(props.strAll,pathname)
+
   useEffect(()=>{
     if(!styleExam1.length||!styleExam2.length||!styleExam3.length){
       getAll();
@@ -39,15 +51,17 @@ function IndexPage(props) {
   >
   <h4>题目信息</h4>
   <h4>题干</h4>
-  <Input placeholder="请输入题目标题,不超过20个字" value={account} onInput={(e)=>{
+  <Input placeholder="请输入题目标题,不超过20个字" defaultValue={arr?arr.title:account} onInput={(e)=>{
     setAccount(e.target.value)
   }} />
-  <Editor value={value1} onChange={(e)=>{
+  <div className={styles.editor}>
+  <Editor value={arr?arr.questions_stem:value1} onChange={(e)=>{
     setvalue1(e)
-  }} />
+   }} />
+  </div>
   <div>
   <h4>请选择考试类型:</h4>
-   <Select style={{ width: 120}}  value={select1} onChange={(e)=>{
+   <Select style={{ width: 120}}  defaultValue={arr?arr.exam_name:select1} onChange={(e)=>{
       setSelect1(e);
    }}>
    {
@@ -57,7 +71,7 @@ function IndexPage(props) {
   </div>
   <div>
   <h4>请选择课程类型:</h4>
-   <Select style={{ width: 120}} value={select2} onChange={(e)=>{
+   <Select style={{ width: 120}} defaultValue={arr?arr.subject_text:select2} onChange={(e)=>{
       setSelect2(e);
    }}>
    {
@@ -67,7 +81,7 @@ function IndexPage(props) {
   </div>
   <div>
   <h4>请选择题目类型:</h4>
-   <Select style={{ width: 120}}  value={select3} onChange={(e)=>{
+   <Select style={{ width: 120}}  defaultValue={arr?arr.questions_type_text:select3} onChange={(e)=>{
       setSelect3(e);
    }}>
    {
@@ -75,9 +89,12 @@ function IndexPage(props) {
    }
    </Select>
   </div>
-  <Editor value={value2} onChange={(e)=>{
+  <div className={styles.editor}>
+  <Editor value={arr?arr.questions_answer:value2} onChange={(e)=>{
     setvalue2(e)
   }}/>
+  </div>
+
   <Button type="primary" onClick={()=>{
     let object={
       questions_type_id:select3,

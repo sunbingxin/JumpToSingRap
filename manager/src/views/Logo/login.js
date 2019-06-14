@@ -39,7 +39,7 @@ function LoginPage(props){
       })(
         <Input
           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-          placeholder="请输入用户名"
+          placeholder="Username"
         />,
       )}
     </Form.Item>
@@ -50,7 +50,7 @@ function LoginPage(props){
         <Input
           prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
           type="password"
-          placeholder="请输入密码"
+          placeholder="Password"
         />,
       )}
     </Form.Item>
@@ -58,13 +58,14 @@ function LoginPage(props){
       {getFieldDecorator('remember', {
         valuePropName: 'checked',
         initialValue: true,
-      })(<Checkbox>记住密码</Checkbox>)}
+      })(<Checkbox>Remember me</Checkbox>)}
       <a className="login-form-forgot" href="">
-        忘记密码
+        Forgot password
       </a>
       <Button type="primary" htmlType="submit" className="login-form-button">
-        登陆
+        Log in
       </Button>
+      Or <a href="">register now!</a>
     </Form.Item>
   </Form>;
   </div>
@@ -78,22 +79,17 @@ LoginPage.defaultProps={
   
 }
 
-
-let mapStateTopProps = state=>{
-
-  return {
-    ...state.user
-  }
+const mapStateTopProps=state=>{
+  return state.user
 }
-let mapDispatchToProps = dispatch=>{
+const mapDispatchTopProps=dispatch=>{
   return {
     login(payload){
-      console.log(payload)
       dispatch({
-        type:'user/logins',
-        payload
+        type:"user/login",
+        payload,
       })
     }
   }
 }
-export default connect(mapStateTopProps,mapDispatchToProps)((Form.create())(LoginPage));
+export default connect(mapStateTopProps,mapDispatchTopProps)((Form.create())(LoginPage));

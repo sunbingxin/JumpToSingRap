@@ -1,4 +1,4 @@
-import {login,exam,examStyle,classStyle,uerId,setExamId,getExamTitle} from "../services";
+import {login,exam,addTextAll,examStyle,classStyle,uerId,setExamId,getExamTitle,searChget} from "../services";
 import {getToken,setToken} from "../utils/Cookie";
 import {routerRedux} from "dva/router"
 export default {
@@ -9,7 +9,6 @@ export default {
     state: {
       isLoad:0,
       isArr:[],
-      isChoos:false,
       styleExam1:[],
       styleExam2:[],
       styleExam3:[],
@@ -50,11 +49,6 @@ export default {
       let data = yield call(exam);
       yield put({type:"examSave",payload:data})
   },
-
-  *ischoose({payload},{call,put}){
-    yield put({type:"IsChoose",payload})
-  },
-
   *addlist({payload},{call,put}){
       let userId=yield call(uerId);
       
@@ -76,9 +70,19 @@ export default {
   *getExamTitle({payload},{call,put}){
     let data=yield call(getExamTitle);
     yield put({type:"getExamAll",payload:data})
-  }
-    },
+  },
+
+  *searchget({payload},{call,put}){
+    let data=yield call(searChget,payload);
+    yield put({type:"getExamAll",payload:data})
+  },
+
+  *gettext({payload},{call,put}){
+    let data=yield call(addTextAll,payload);
+    yield put ({type:"getTextAll",payload:data})
+  },
   
+    },
     // 同步操作
     reducers: {
       save(state, {payload}) {
@@ -107,6 +111,9 @@ export default {
       },
       getExamAll(state,{payload}){
         return {...state,strAll:payload.code===1?payload.data:[]}
+      },
+      getTextAll(state,{payload}){
+        return {...state,isCode:payload.code===1?1:-1}
       }
 
     },

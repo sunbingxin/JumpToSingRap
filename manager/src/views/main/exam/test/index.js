@@ -2,16 +2,20 @@ import React,{useEffect,useState} from "react"
 import style from "./index.css"
 import {connect} from "dva"
 import { Layout, Breadcrumb, Select, Row, Col, Button, Icon, Tag ,Table} from 'antd';
+import {Link} from "dva/router"
 const { Content } = Layout;
 const { Option } = Select;
 const { CheckableTag } = Tag;
-const columns = [
+const columns = function(props){
+  return [
     {
       dataIndex: '',
       exam_name:"",
       key: 'name', 
       render: text => (
-        <>
+        <div onClick={()=>{
+          props.history.push("/exam/detail?id="+text.questions_id)
+        }} >
             <h4>{text.title}</h4>
             <h4>
                 <Tag color="blue">{text.questions_type_text}</Tag>
@@ -20,20 +24,21 @@ const columns = [
             </h4>
             <a href="">{text.user_name}</a>
             <a href="">发布</a>
-        </>
+        </div>
       ),
     },
     {
       key: 'action',
       render: (text, record) => (
         <span style={{position:"absolute",right:20}}>
-          <a href="">编辑</a>
+          <Link to={`/exam/add?id=${text.questions_id}`}>编辑</Link>
         </span>
       ),
     },
-  ];
+  ]
+};
 function Look(props) {
-  let {getExamTitle,addExam,strAll,styleExam1,styleExam2,styleExam3}=props;
+  let {getExamTitle,addExam,strAll,styleExam1,styleExam2,styleExam3,searchget}=props;
    useEffect(()=>{
       if(!strAll){
         getExamTitle();
@@ -42,6 +47,7 @@ function Look(props) {
         addExam();
       }
    },[strAll,styleExam2,styleExam1,styleExam3])
+   console.log(strAll);
    const [select1, setSelect1] = useState("");
    const [select2, setSelect2] = useState("");
    const [select3, setSelect3] = useState("");
@@ -57,11 +63,10 @@ function Look(props) {
                     margin: 0,
                     minHeight: 280,
                     overflow:'auto'
-                }}
-            >
+                }}>
                 <Row className={style.row}>
-                    <Col span={6}>课程类型:</Col>
-                    <Col span={18}>
+                    <Col span={6} className={style.rowleft}>课程类型:</Col>
+                    <Col span={18} className={style.rowrigint} >
                         <div>
                           {
                             styleExam2&&styleExam2.map((item,index)=><MyTag key={index}>{item.subject_text}</MyTag>)
@@ -75,38 +80,43 @@ function Look(props) {
                         defaultValue="" 
                         style={{ width: 120}} 
                         value={select2}
-                         onChange={(e)=>{
-                           setSelect2(e);
-                           }}>
-   {
-     styleExam1.map((item,index)=><Option key={index} value={item.exam_id}>{item.exam_name}</Option>)
-   }
-   </Select>
-                    </Col>
 
-                    <Col span={8}>题目类型:<Select
-                        defaultValue=""
-                        style={{ width: 120 }}
-                        dropdownRender={menu => (
-                            <div>
-                                {menu}
-                            </div>
-                        )}
-                    >
-                         {
-     styleExam3&&styleExam3.map((item,index)=><Option  key={index} value={item.questions_type_id}>{item.questions_type_text}</Option>)
-   }
-                    </Select></Col>
+                        onChange={(e)=>{
+                          setSelect2(e);
+                          }}>
+                  {
+                    styleExam1.map((item,index)=><Option key={index} value={item.exam_id}>{item.exam_name}</Option>)
+                  }
+                </Select>
+                    </Col>
+                  
+                    <Col lg={{ span: 6, offset: 2 }} span={8} >
+                        题目类型:  <Select 
+                        defaultValue="" 
+                        style={{ width: 120}} 
+                        value={select3}
+
+                        onChange={(e)=>{
+                          setSelect3(e);
+                          }}>
+                  {
+                   styleExam3&&styleExam3.map((item,index)=><Option  key={index} value={item.questions_type_id}>{item.questions_type_text}</Option>)                    
+                  }
+                </Select>
+                    </Col>
                     <Col span={8}>
-                        <Button className={style.btn} type="primary">
-                            <Icon type="search" />查询
+                        <Button className={style.btn} type="primary" onClick={()=>{btn()}} >
+                           <Icon type="search" />查询
                     </Button>
                     </Col>
                 </Row>
-                <Table  className={style.table} columns={columns} dataSource={strAll} />
+                <Table  className={style.table} columns={columns(props)} dataSource={strAll} />
             </Content>
         </Layout>
     )
+    function btn(){
+      searchget({exam_id:select2});
+    }
 }
 class MyTag extends React.Component {
     state = { checked: false };
@@ -117,7 +127,7 @@ class MyTag extends React.Component {
   
     render() {
       return (
-        <CheckableTag {...this.props} checked={this.state.checked} onChange={this.handleChange} />
+        <CheckableTag {...this.props}  checked={this.state.checked} onChange={this.handleChange}/>
       );
     }
   }
@@ -138,6 +148,12 @@ class MyTag extends React.Component {
           type:"user/addlist",
         })
       },
+      searchget(payload){
+        dispatch({
+          type:"user/searchget",
+          payload,
+        })
+      }
     }
   
  }

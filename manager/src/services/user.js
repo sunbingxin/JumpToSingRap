@@ -50,3 +50,18 @@ export function getExamTitle(){
     method:"GET",
   })
 }
+
+export function searChget(params){
+  return request({
+    url:"/exam/questions/condition?exam_id="+params.exam_id,
+    method:"GET",
+  })
+}
+
+export function addTextAll(params){
+  console.log(params);
+ return request({
+   url:"/exam/insertQuestionsType?text="+params.text+"&sort="+params.sort,
+   method:"GET",
+ })
+}
