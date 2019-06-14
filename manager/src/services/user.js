@@ -50,3 +50,10 @@ export function getExamTitle(){
     method:"GET",
   })
 }
+
+export function searChget(params){
+  return request({
+    url:"/exam/questions/condition?exam_id="+params.exam_id,
+    method:"GET",
+  })
+}

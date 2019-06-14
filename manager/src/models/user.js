@@ -1,4 +1,4 @@
-import {login,exam,examStyle,classStyle,uerId,setExamId,getExamTitle} from "../services";
+import {login,exam,examStyle,classStyle,uerId,setExamId,getExamTitle,searChget} from "../services";
 import {getToken,setToken} from "../utils/Cookie";
 import {routerRedux} from "dva/router"
 export default {
@@ -75,6 +75,11 @@ export default {
 
   *getExamTitle({payload},{call,put}){
     let data=yield call(getExamTitle);
+    yield put({type:"getExamAll",payload:data})
+  },
+
+  *searchget({payload},{call,put}){
+    let data=yield call(searChget,payload);
     yield put({type:"getExamAll",payload:data})
   }
     },
