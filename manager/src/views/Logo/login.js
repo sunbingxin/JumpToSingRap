@@ -1,7 +1,7 @@
 import { connect } from 'dva';
 import styles from './login.scss';
 import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
-import React, { useEffect,useState } from 'react'
+import React, { useEffect } from 'react'
 
 function LoginPage(props){
   useEffect(()=>{
@@ -31,7 +31,7 @@ function LoginPage(props){
   // 表单校验
   const { getFieldDecorator } = props.form;
   return <div className={styles.warp}>
-  <Form onSubmit={handleSubmit} className="login-form"  className={styles.box}>
+  <Form onSubmit={handleSubmit}  className={styles.box}>
     <Form.Item className={styles.input1}>
       {getFieldDecorator('username', {
         validateTrigger: 'onBlur',

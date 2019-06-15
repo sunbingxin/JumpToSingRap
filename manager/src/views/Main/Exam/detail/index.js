@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react"
 import {connect} from "dva"
 import Styles from './index.css';
-import { Layout, Breadcrumb, Select, Row, Col, Button, Icon, Tag ,Table} from 'antd';
-const { Header, Content, Sider } = Layout;
+import { Layout, Breadcrumb, Tag } from 'antd';
+const { Content } = Layout;
 
 function Detail(props) {
     let [data,setdata]=useState({arr:""});

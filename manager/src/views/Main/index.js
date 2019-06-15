@@ -7,10 +7,13 @@ import {Route,Switch} from 'dva/router';
 
 import Menuitem from "../../components/MenuItem"
 import Add from "./Exam/add/index"
-import Classify from "./Exam/classify/index"
+import Classify from "./Exam/classify/index"     //考试管理
 import Test from "./Exam/test/index"
 import Detail from "./Exam/detail/index"
-
+//------------------------------------------------------
+import Adduser from "./User/addUser/index"
+//-------------------------------------------------------
+import ClassManage from "./Class/classManage/index"
 
 const { Header,Sider } = Layout;
 
@@ -42,6 +45,13 @@ function IndexPage(props) {
            <Route path="/exam/detail" component={Detail}></Route>
            <Route path="/exam/classify" component={Classify}></Route>
            <Route path="/exam/test" component={Test}></Route>
+
+           <Route path="/user/adduser" component={Adduser}></Route>
+
+
+             <Route path="/class/classmanage" component={ClassManage}></Route> 
+             <Route path="/class/teammanage" component={null}></Route>  
+             <Route path="/class/studmange" component={null}></Route>
            </Switch>
           </div>
        </div>

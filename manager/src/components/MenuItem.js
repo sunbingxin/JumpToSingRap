@@ -5,7 +5,6 @@ function MenuItem(){
   return <Menu
   mode="inline"
   defaultSelectedKeys={['1']}
-  defaultOpenKeys={['sub1']}
   style={{ height: '100%' }}
 >
   <SubMenu
@@ -26,6 +25,43 @@ function MenuItem(){
     <Menu.Item key="3">
     <Link to="/exam/test">查看试题</Link>
     </Menu.Item>
+  </SubMenu>
+
+  <SubMenu
+    key="sub2"
+    title={
+      <span>
+        <Icon type="user" />
+        用户管理
+      </span>
+    }
+  >
+    <Menu.Item key="2">
+    <Link to="/user/adduser">添加用户</Link>
+    </Menu.Item>
+    <Menu.Item key="1">
+     <Link to="/user/show">用户管理</Link>
+    </Menu.Item>    
+  </SubMenu>
+
+  <SubMenu
+    key="sub3"
+    title={
+      <span>
+        <Icon type="user" />
+        班级管理
+      </span>
+    }
+  >
+    <Menu.Item key="1">
+    <Link to="/class/classmanage">班级管理</Link>
+    </Menu.Item>
+    <Menu.Item key="2">
+     <Link to="/class/teammanage">教室管理</Link>
+    </Menu.Item>    
+    <Menu.Item key="3">
+     <Link to="/class/studmange">学生管理</Link>
+    </Menu.Item>   
   </SubMenu>
 </Menu>
 } 

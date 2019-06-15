@@ -57,7 +57,7 @@ function IndexPage(props) {
   <div className={styles.editor}>
   <Editor value={arr?arr.questions_stem:value1} onChange={(e)=>{
     setvalue1(e)
-   }} />
+   }}/>
   </div>
   <div>
   <h4>请选择考试类型:</h4>
