@@ -14,6 +14,7 @@ import Detail from "./Exam/detail/index"
 import Adduser from "./User/addUser/index"
 //-------------------------------------------------------
 import ClassManage from "./Class/classManage/index"
+import Teammanage from "./Class/teammanage/index"
 
 const { Header,Sider } = Layout;
 
@@ -50,7 +51,7 @@ function IndexPage(props) {
 
 
              <Route path="/class/classmanage" component={ClassManage}></Route> 
-             <Route path="/class/teammanage" component={null}></Route>  
+             <Route path="/class/teammanage" component={Teammanage}></Route>  
              <Route path="/class/studmange" component={null}></Route>
            </Switch>
           </div>

@@ -56,7 +56,7 @@ function IndexPage(props) {
     }}>
       添加类型
     </Button>
-    <Table dataSource={isArr} columns={columns} />;
+    <Table dataSource={isArr} columns={columns} />
     <Modal
       title="请输入您要填写的试题"
       visible={state}
