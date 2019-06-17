@@ -1,5 +1,5 @@
 import { connect } from 'dva';
-import styles from './login.scss';
+import styles from './login.css';
 import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import React, { useEffect } from 'react'
 

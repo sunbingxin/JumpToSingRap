@@ -15,6 +15,12 @@ import Adduser from "./User/addUser/index"
 //-------------------------------------------------------
 import ClassManage from "./Class/classManage/index"
 import Teammanage from "./Class/teammanage/index"
+import Show from './User/show/index'
+import Markingadd from './Marking/add/index'
+import Markinglists from './Marking/lists/index'
+import ExamDetail from './Marking/ExamDetail/index'
+import Student from './Class/student/index'
+
 
 const { Header,Sider } = Layout;
 
@@ -48,11 +54,17 @@ function IndexPage(props) {
            <Route path="/exam/test" component={Test}></Route>
 
            <Route path="/user/adduser" component={Adduser}></Route>
+           <Route path="/user/show" component={Show}></Route>
 
+           <Route path="/class/classmanage" component={ClassManage}></Route> 
+           <Route path="/class/teammanage" component={Teammanage}></Route>  
+           <Route path="/class/studmange" component={null}></Route>
 
-             <Route path="/class/classmanage" component={ClassManage}></Route> 
-             <Route path="/class/teammanage" component={Teammanage}></Route>  
-             <Route path="/class/studmange" component={null}></Route>
+           
+           <Route path="/marking/add" component={null}></Route>
+           <Route path="/marking/lists" component={Markinglists}></Route>
+           <Route path="/exam/ExamDetail" component={ExamDetail}></Route>
+           <Route path="/class/student" component={Student}></Route>
            </Switch>
           </div>
        </div>

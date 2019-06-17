@@ -8,11 +8,10 @@ function MenuItem(){
   style={{ height: '100%' }}
 >
   <SubMenu
-    key="sub1"
     title={
       <span>
         <Icon type="user" />
-        考试管理
+        试题管理
       </span>
     }
   >
@@ -40,12 +39,26 @@ function MenuItem(){
     <Link to="/user/adduser">添加用户</Link>
     </Menu.Item>
     <Menu.Item key="1">
-     <Link to="/user/show">用户管理</Link>
-    </Menu.Item>    
+    <Link to="/user/show">用户管理</Link>
+    </Menu.Item>
   </SubMenu>
 
   <SubMenu
-    key="sub3"
+    title={
+      <span>
+        <Icon type="user" />
+        考试管理
+      </span>
+    }
+  >
+    <Menu.Item key="1">
+    <Link to="/marking/add">添加考试</Link>
+    </Menu.Item>
+    <Menu.Item key="2">
+    <Link to="/marking/lists">考试列表</Link>
+    </Menu.Item>
+  </SubMenu>
+  <SubMenu
     title={
       <span>
         <Icon type="user" />
@@ -60,8 +73,8 @@ function MenuItem(){
      <Link to="/class/teammanage">教室管理</Link>
     </Menu.Item>    
     <Menu.Item key="33">
-     <Link to="/class/studmange">学生管理</Link>
-    </Menu.Item>   
+    <Link to="/class/student">学生管理</Link>
+    </Menu.Item>
   </SubMenu>
 </Menu>
 } 

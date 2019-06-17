@@ -7,9 +7,11 @@ import { message } from 'antd';
 // 1. Initialize
 const app = dva({
     onAction: createLogger(),
-    onError(e) {
-        message.error(e.message, /* duration */3);
-      },
+// import {createLogger} from 'redux-logger';
+onError(e) {
+    message.error(e.message, /* duration */3);
+  },
+// 1. Initialize
 });
 app.use(createLoading());
 
@@ -21,6 +23,7 @@ app.use(createLoading());
  app.model(require('./models/user').default);
  app.model(require('./models/makerUser').default);
  app.model(require('./models/class').default);
+ app.model(require('./models/show').default);
 
 // 4. Router
 app.router(require('./router').default);

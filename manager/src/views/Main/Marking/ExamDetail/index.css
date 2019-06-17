@@ -1,0 +1,14 @@
+.content{
+    width: 95%;
+    margin-left: 2.5%;
+    background: white;
+}
+.every{
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+.every p{
+    padding-left: 10px;
+    padding-right: 10px;
+}
