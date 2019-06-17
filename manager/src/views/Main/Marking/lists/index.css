@@ -1,0 +1,87 @@
+.content{
+    width: 100%;
+    height: 100%;
+}
+.content>span{
+    width: 100px;
+    height: 40px;
+    display: inline-block;
+    font-size: 25px;
+    margin-left: 30px;
+    padding-top: 20px;
+}
+.top{
+    width: 95%;
+    height: 100px;
+    background: white;
+    margin-left: 2.5%;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.con{
+    width: 100%;
+    height: 50px;
+    line-height: 100px;
+}
+.con span,button{
+    margin-left: 40px;
+}
+.bot{
+    width: 95%;
+    background: white;
+    border-radius: 10px;
+    margin-left: 2.5%;
+    margin-top: 50px;
+}
+.shang{
+    width: 95%;
+    margin-left: 2.5%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.shang>span{
+    font-size: 15px;
+    margin-top: 10px;
+}
+.ding{
+    position: absolute;
+    right: 0%;
+    margin-top: 10px;
+}
+.xia{
+    width: 95%;
+    height: 50px;
+    margin-left: 2.5%;
+    background: #e6e6e6;
+    line-height: 50px;
+}
+.xia ul{
+    display: flex;
+}
+.xia ul li:nth-child(1){
+    flex: 2;
+    margin-left: 20px;
+}
+.xia ul li{
+    flex: 1;
+    margin-left: 20px;
+}
+.every{
+    width: 95%;
+    height: 100px;
+    margin-left: 2.5%;
+    line-height: 100px;
+}
+.every ul{
+    display: flex;
+}
+.every ul li:nth-child(1){
+    flex: 2;
+    margin-left: 20px;
+}
+.every ul li{
+    flex: 1;
+    margin-left: 20px;
+}

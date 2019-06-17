@@ -1,0 +1,13 @@
+.userBox{
+    margin-left: 50px;
+}
+.list{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.list>span{
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+}

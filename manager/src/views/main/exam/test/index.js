@@ -47,7 +47,7 @@ function Look(props) {
         addExam();
       }
    },[strAll,styleExam2,styleExam1,styleExam3])
-   console.log(strAll);
+  //  console.log(strAll);
    const [select1, setSelect1] = useState("");
    const [select2, setSelect2] = useState("");
    const [select3, setSelect3] = useState("");

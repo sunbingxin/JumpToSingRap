@@ -10,6 +10,11 @@ import Add from "./Exam/add/index"
 import Classify from "./Exam/classify/index"
 import Test from "./Exam/test/index"
 import Detail from "./Exam/detail/index"
+import Show from './User/show/index'
+import Markingadd from './Marking/add/index'
+import Markinglists from './Marking/lists/index'
+import ExamDetail from './Marking/ExamDetail/index'
+import Student from './Class/student/index'
 
 
 const { Header,Sider } = Layout;
@@ -42,6 +47,11 @@ function IndexPage(props) {
            <Route path="/exam/detail" component={Detail}></Route>
            <Route path="/exam/classify" component={Classify}></Route>
            <Route path="/exam/test" component={Test}></Route>
+           <Route path="/user/show" component={Show}></Route>
+           <Route path="/marking/add" component={null}></Route>
+           <Route path="/marking/lists" component={Markinglists}></Route>
+           <Route path="/exam/ExamDetail" component={ExamDetail}></Route>
+           <Route path="/class/student" component={Student}></Route>
            </Switch>
           </div>
        </div>

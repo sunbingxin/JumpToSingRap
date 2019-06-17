@@ -43,7 +43,11 @@ export function setExamId(params){
      data:params,
    })
 }
-
+export function allQuestion() {
+  return request({
+    url:'/exam/exam'
+  })
+}
 export function getExamTitle(){
   return request({
     url:"/exam/questions/new",
@@ -64,4 +68,10 @@ export function addTextAll(params){
    url:"/exam/insertQuestionsType?text="+params.text+"&sort="+params.sort,
    method:"GET",
  })
+}
+export function ExamDetail(params) {
+  console.log(params)
+  return request({
+    url:'/exam/exam?exam_exam_id=' + params.exam_exam_id,
+  })
 }

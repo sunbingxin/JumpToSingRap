@@ -1,4 +1,4 @@
-import {login,exam,addTextAll,examStyle,classStyle,uerId,setExamId,getExamTitle,searChget} from "../services";
+import {login,exam,addTextAll,examStyle,classStyle,uerId,allQuestion,ExamDetail,setExamId,getExamTitle,searChget} from "../services";
 import {getToken,setToken} from "../utils/Cookie";
 import {routerRedux} from "dva/router"
 export default {
@@ -81,7 +81,22 @@ export default {
     let data=yield call(addTextAll,payload);
     yield put ({type:"getTextAll",payload:data})
   },
-  
+  *ExamDetail({payload},{call,put}){
+    let detail = yield call(ExamDetail,payload)
+    console.log(detail)
+    yield put({
+      type:'ExamDeta',
+      payload:detail
+    })
+  },
+  *allQuestion({payload},{call,put}){
+    let data = yield call(allQuestion)
+    console.log(data)
+    yield put({
+      type:'allQue',
+      payload:data
+    })
+  },
     },
     // 同步操作
     reducers: {
@@ -96,6 +111,9 @@ export default {
       },
       userId(state,{payload}){
        return {...state,obj:payload.code===1?payload.data:{}}
+      },
+      allQue(state, {payload}) {
+        return { ...state, data:payload.code===1?payload.exam:[]};
       },
       styleExam(state,{payload}){
         return {...state,styleExam1:payload.code===1?payload.data:[]}
@@ -114,7 +132,10 @@ export default {
       },
       getTextAll(state,{payload}){
         return {...state,isCode:payload.code===1?1:-1}
-      }
+      },
+      ExamDeta(state, {payload}) {
+        return { ...state, data:payload.code===1?payload.exam:[]};
+      },
 
     },
   
