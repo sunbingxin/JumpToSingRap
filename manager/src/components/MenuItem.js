@@ -53,13 +53,13 @@ function MenuItem(){
       </span>
     }
   >
-    <Menu.Item key="1">
+    <Menu.Item key="11">
     <Link to="/class/classmanage">班级管理</Link>
     </Menu.Item>
-    <Menu.Item key="2">
+    <Menu.Item key="22">
      <Link to="/class/teammanage">教室管理</Link>
     </Menu.Item>    
-    <Menu.Item key="3">
+    <Menu.Item key="33">
      <Link to="/class/studmange">学生管理</Link>
     </Menu.Item>   
   </SubMenu>

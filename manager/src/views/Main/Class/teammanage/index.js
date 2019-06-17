@@ -4,7 +4,7 @@ import styles from  "./index.css"
 import {Layout,Breadcrumb,Button,Table,Modal,Form,Input } from "antd";
 const { Content } = Layout;
 function IndexPage(props) {
-  let {roomData,addRoom}=props;
+  let {roomData,addRoom,getGrade}=props;
   const columns = [
     {
       title: '教室号',
@@ -23,7 +23,9 @@ function IndexPage(props) {
   ];
   let [choose,setChoose]=useState(false);
   let [title,setTitle]=useState("");
-  useEffect(()=>{},[])
+  useEffect(()=>{
+    getGrade();
+  },[])
  return  <Layout style={{ padding: '0 24px 24px' }}>
  <Breadcrumb style={{ margin: '16px 0' }}>
    <Breadcrumb.Item>班级管理</Breadcrumb.Item>
@@ -81,7 +83,13 @@ let mapDispatchToProps=dispatch=>{
              type:"class/addRoom",
              payload,
          })
-     }
+     },
+     getGrade(){
+      dispatch({
+        type:"class/gtade", //获取班级展示
+      })
+    },
+       
     }
   }
 

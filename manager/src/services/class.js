@@ -44,3 +44,11 @@ export function addRoom(payload){
         data:payload,
     })
 }
+
+export function gradUpdata(payload){
+    return request({
+        url:"/manger/grade/update",
+        method:"PUT",
+        data:payload,
+    })
+}

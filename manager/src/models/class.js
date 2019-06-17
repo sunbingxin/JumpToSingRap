@@ -1,4 +1,4 @@
-import {getGtade,getSubject,getRoom,addGtade,delClass,addRoom} from "../services"
+import {getGtade,getSubject,getRoom,addGtade,delClass,addRoom,gradUpdata} from "../services"
 export default {
     // 命名空间
     namespace: 'class',
@@ -32,7 +32,11 @@ export default {
       },
       *addRoom({payload},{call,put}){
         let data=yield call(addRoom,payload);
-        console.log(data);
+        console.log(data);//删除
+      },
+      *gradUpdata({payload},{call,put}){
+        let data=yield call(gradUpdata,payload);
+        console.log(data);//更新
       }
     },
   

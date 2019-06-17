@@ -5,7 +5,7 @@ import {Layout,Breadcrumb,Button,Table,Modal,Form,Input,Select } from "antd";
 const { Content } = Layout;
 const { Option } = Select;
 function IndexPage(props) {
-  let {getGrade,classData,subjectData,roomData,addGrande,delClass}=props;
+  let {getGrade,classData,subjectData,roomData,addGrande,delClass,grader,gradUpdata}=props;
   const columns = [
     {
       title: '班级名称',
@@ -28,7 +28,12 @@ function IndexPage(props) {
               grade_id:record.grade_id
             })
           }} >删除</a>|<a onClick={()=>{
-            console.log(record);
+            setCheckOne(true);
+            setChoose(true);
+            setTitle(record.grade_name)
+            setSeleOne(record.room_id)
+            setSeleTwo(record.subject_id)
+            setGradeid(record.grade_id)
           }}>修改</a>
         </span>
       ),
@@ -38,8 +43,10 @@ function IndexPage(props) {
   let [title,setTitle]=useState("");
   let [seleOne,setSeleOne]=useState("");
   let [seleTwo,setSeleTwo]=useState("");
+  let [gradeid,setGradeid]=useState("");
+  let [checkOne,setCheckOne]=useState(false);
   useEffect(()=>{
-    getGrade()
+      getGrade()
   },["classData"])
  return  <Layout style={{ padding: '0 24px 24px' }}>
  <Breadcrumb style={{ margin: '16px 0' }}>
@@ -54,7 +61,12 @@ function IndexPage(props) {
       }}
    >
    <Button type="primary" icon="plus" onClick={()=>{
-      setChoose(true)
+      setChoose(true);
+      setCheckOne(false);
+      setTitle("")
+      setSeleOne("")
+      setSeleTwo("")
+      
     }}>
       添加班级
     </Button>
@@ -71,17 +83,17 @@ function IndexPage(props) {
         >
          <Form>
          <Form.Item label="班级名:">
-           <Input placeholder="班级名" onChange={(e)=>{setTitle(e.target.value)}} ></Input>
+           <Input  disabled={checkOne} defaultValue={title} placeholder="班级名"  onChange={(e)=>{setTitle(e.target.value)}} ></Input>
          </Form.Item>
          <Form.Item label="教室号:">
-         <Select placeholder="请选择教室号" onChange={(e)=>setSeleOne(e)}>
+         <Select placeholder="请选择教室号" defaultValue={seleOne} onChange={(e)=>setSeleOne(e)}>
          {
            roomData&&roomData.map((item,key)=><Option key={key} value={item.room_id}>{item.room_text}</Option>)
          }
          </Select>
          </Form.Item>
          <Form.Item label="课程名:">
-         <Select placeholder="课程名"  onChange={(e)=>setSeleTwo(e)}>
+         <Select placeholder="课程名" defaultValue={seleTwo} onChange={(e)=>setSeleTwo(e)}>
          {
            subjectData&&subjectData.map((item,key)=><Option key={key} value={item.subject_id}>{item.subject_text}</Option>)
          }
@@ -92,12 +104,21 @@ function IndexPage(props) {
   </Content>
 </Layout>
 function handleOk(){
-  if(title&&seleOne&&seleTwo){
-    addGrande({
-      grade_name:title,
-      room_id:seleOne,
-      subject_id:seleTwo,
-    })
+  if(checkOne){
+   gradUpdata({
+    grade_id:gradeid,
+    grade_name:title,
+    room_id:seleOne,
+    subject_id:seleTwo,
+   })
+  }else{
+    if(title&&seleOne&&seleTwo){
+      addGrande({
+        grade_name:title,
+        room_id:seleOne,
+        subject_id:seleTwo,
+      })
+    }
   }
   setChoose(false);
 }
@@ -127,6 +148,12 @@ let mapDispatchToProps=dispatch=>{
           type:"class/delClass",
           payload,
         })
+       },
+       gradUpdata(payload){
+         dispatch({
+           type:"class/gradUpdata",
+           payload,
+         })
        }
     }
   }
