@@ -37,15 +37,12 @@ function UserIndex(props){
     let GengAdduser=e=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-             console.log();
              genYon({
-                user_id:values.userid_Child,
+                user_id:values.userid_top ,
                 user_name:values.user_Child,
                 user_pwd:values.pwd,
-                identity_id:values.userid_top
+                identity_id:values.userid_Child
              })
-             //userid_top  user_Child  pwd  userid_Child
-             
         }); 
     }
     //添加身份

@@ -28,12 +28,13 @@ function IndexPage(props) {
               grade_id:record.grade_id
             })
           }} >删除</a>|<a onClick={()=>{
-            setCheckOne(true);
-            setChoose(true);
             setTitle(record.grade_name)
             setSeleOne(record.room_id)
             setSeleTwo(record.subject_id)
             setGradeid(record.grade_id)
+            setCheckOne(true);
+            setChoose(true);
+            setXian(true);
           }}>修改</a>
         </span>
       ),
@@ -45,6 +46,7 @@ function IndexPage(props) {
   let [seleTwo,setSeleTwo]=useState("");
   let [gradeid,setGradeid]=useState("");
   let [checkOne,setCheckOne]=useState(false);
+  let [xian,setXian]=useState(false);
   useEffect(()=>{
       getGrade()
   },["classData"])
@@ -61,12 +63,9 @@ function IndexPage(props) {
       }}
    >
    <Button type="primary" icon="plus" onClick={()=>{
+      setXian(false);
       setChoose(true);
       setCheckOne(false);
-      setTitle("")
-      setSeleOne("")
-      setSeleTwo("")
-      
     }}>
       添加班级
     </Button>
@@ -83,17 +82,17 @@ function IndexPage(props) {
         >
          <Form>
          <Form.Item label="班级名:">
-           <Input  disabled={checkOne} defaultValue={title} placeholder="班级名"  onChange={(e)=>{setTitle(e.target.value)}} ></Input>
+           <Input  disabled={checkOne} value={xian?title:null} placeholder="班级名"  onChange={(e)=>{setTitle(e.target.value)}} ></Input>
          </Form.Item>
          <Form.Item label="教室号:">
-         <Select placeholder="请选择教室号" defaultValue={seleOne} onChange={(e)=>setSeleOne(e)}>
+         <Select placeholder="请选择教室号" value={xian?seleOne:null} onChange={(e)=>setSeleOne(e)}>
          {
            roomData&&roomData.map((item,key)=><Option key={key} value={item.room_id}>{item.room_text}</Option>)
          }
          </Select>
          </Form.Item>
          <Form.Item label="课程名:">
-         <Select placeholder="课程名" defaultValue={seleTwo} onChange={(e)=>setSeleTwo(e)}>
+         <Select placeholder="课程名" value={xian?seleTwo:null} onChange={(e)=>setSeleTwo(e)}>
          {
            subjectData&&subjectData.map((item,key)=><Option key={key} value={item.subject_id}>{item.subject_text}</Option>)
          }
