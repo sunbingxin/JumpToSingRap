@@ -29,6 +29,7 @@ export default {
        *addUsers({payload},{call,put}){
          let data=yield call(addUsers,payload);
          yield put({type:"adduse",payload:data});
+         
        }
     },
   
