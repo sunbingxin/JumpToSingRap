@@ -35,10 +35,10 @@ function MenuItem(){
       </span>
     }
   >
-    <Menu.Item key="2">
+    <Menu.Item key="4">
     <Link to="/user/adduser">添加用户</Link>
     </Menu.Item>
-    <Menu.Item key="1">
+    <Menu.Item key="5">
     <Link to="/user/show">用户管理</Link>
     </Menu.Item>
   </SubMenu>
@@ -51,10 +51,10 @@ function MenuItem(){
       </span>
     }
   >
-    <Menu.Item key="1">
+    <Menu.Item key="6">
     <Link to="/marking/add">添加考试</Link>
     </Menu.Item>
-    <Menu.Item key="2">
+    <Menu.Item key="7">
     <Link to="/marking/lists">考试列表</Link>
     </Menu.Item>
   </SubMenu>
