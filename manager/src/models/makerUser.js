@@ -1,4 +1,4 @@
-import {identity,getUsers,addUsers,getAuthority,getRelation} from "../services"
+import {genYons,identity,getUsers,addUsers,getAuthority,getRelation,addYonHu,setQuanxians,addauthorityViewes,setIdentityApi,setIdentityViews} from "../services"
 
 export default {
     // 命名空间
@@ -29,7 +29,37 @@ export default {
        *addUsers({payload},{call,put}){
          let data=yield call(addUsers,payload);
          yield put({type:"adduse",payload:data});
-         
+         yield put({type:"gaiZhi"});
+       },
+       *addYon({payload},{call,put}){
+         let data=yield call(addYonHu,payload);
+         yield put({type:"adduse",payload:data});
+         yield put({type:"gaiZhi"});
+       },
+       *genYon({payload},{call,put}){
+         let data=yield call(genYons,payload);
+         yield put({type:"adduse",payload:data});
+         yield put({type:"gaiZhi"});
+       },
+       *setQuanxian({payload},{call,put}){
+         let data=yield call(setQuanxians,payload);
+         yield put({type:"adduse",payload:data});
+         yield put({type:"gaiZhi"});
+       },
+       *addauthorityViewe({payload},{call,put}){
+         let data=yield call(addauthorityViewes,payload);//视图权限问题
+         yield put({type:"adduse",payload:data});
+         yield put({type:"gaiZhi"});
+       },
+       *setIdentityApi({payload},{call,put}){
+         let data=yield call(setIdentityApi,payload);
+         yield put({type:"adduse",payload:data});
+         yield put({type:"gaiZhi"});
+       },
+       *setIdentityView({payload},{call,put}){
+         let data=yield call(setIdentityViews,payload);
+         yield put({type:"adduse",payload:data});
+         yield put({type:"gaiZhi"});
        }
     },
   
@@ -49,6 +79,9 @@ export default {
       },
       adduse(state,{payload}){
         return {...state,addCode:payload.code===1?1:-1}
+      },
+      gaiZhi(state,actions){
+        return {...state,addCode:0}
       }
     },
   

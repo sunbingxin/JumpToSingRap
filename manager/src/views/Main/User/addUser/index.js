@@ -2,17 +2,24 @@ import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './index.scss';
-import { Button ,Form,Input,Select} from 'antd';
+import { Button ,Form,Input,Select,message} from 'antd';
 
 const { Option } = Select;
 
 function UserIndex(props){
     //添加用户的change事件的初始值
     let [identity_id,UpChangeid]=useState("")
-    let {identityidList,useridList,getAllDate,addUsers,Authhority,uthorityRelation}=props;
+    let {identityidList,useridList,getAllDate,addUsers,Authhority,
+        uthorityRelation,addCode,addYon,genYon,setQuanxian,addauthorityViewe,setIdentityApi,setIdentityView}=props;
+
     useEffect(()=>{
       getAllDate();
-    },[]);
+    },["addCode"]);
+    if(addCode===1){
+      message.success('成功');
+    }else if(addCode===-1){
+        message.error('失败');
+    }
     //form表单提交按钮
     let handleSubmitOne=e=>{
         
@@ -21,13 +28,25 @@ function UserIndex(props){
     let HandAdduser=e=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-             props.Adduser({
-                user_name:values.user_Null,
-                user_pwd:values.pwd,
-                identity_id
-             })
-            
+             if(values.user_Null&&values.pwd&&identity_id){
+                addYon({user_name:values.user_Null,user_pwd:values.pwd,identity_id:identity_id});
+             }
         });
+    }
+    //跟新用户
+    let GengAdduser=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+             console.log();
+             genYon({
+                user_id:values.userid_Child,
+                user_name:values.user_Child,
+                user_pwd:values.pwd,
+                identity_id:values.userid_top
+             })
+             //userid_top  user_Child  pwd  userid_Child
+             
+        }); 
     }
     //添加身份
     let addiDentity=(e)=>{
@@ -38,6 +57,50 @@ function UserIndex(props){
                 identity_text:values.identity_Name,
               })
             }
+        });
+    }
+    //添加权限
+    let setQuan=(e)=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+           if(values.Permission_Name&&values.Permission_Url&&values.Permission_method){
+            setQuanxian({
+                api_authority_text:values.Permission_Name,
+                api_authority_url:values.Permission_Url,
+                api_authority_method:values.Permission_method
+               })
+           }
+        });
+    }
+    //添加身份设置api接口权限
+    let addauthority=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+          let viewText = Authhority.find(item=>item.view_authority_id===values.view).view_authority_text
+          if(viewText&&values.view){
+            addauthorityViewe({
+                view_authority_text:viewText,
+                view_id:values.view
+              })
+          }
+        });
+    }
+    //添加视图权限
+    let setIdent=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            if(values.identity&&values.Api_port){
+                setIdentityApi({identity_id:values.identity,api_authority_id:values.Api_port})
+            }
+        });
+    }
+    let setIdentView=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            setIdentityView({
+                identity_id:values.id_dentity,
+                view_authority_id:values.View_dentity
+            })
         });
     }
     //添加用户的change事件
@@ -116,7 +179,7 @@ function UserIndex(props){
                                 </Select>
                             )}
                         </Form.Item>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" className={styles.eve} htmlType="submit" onClick={GengAdduser}>
                             确定
                         </Button>
                         <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -152,7 +215,7 @@ function UserIndex(props){
                                 </Select>
                             )}
                         </Form.Item>
-                        <Button type="primary" htmlType="submit" onClick={HandAdduser}>
+                        <Button type="primary" className={styles.eve} htmlType="submit" onClick={HandAdduser}>
                             确定
                         </Button>
                         <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -174,7 +237,7 @@ function UserIndex(props){
                             />,
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit" onClick={addiDentity}>
+                    <Button type="primary" htmlType="submit" className={styles.eve} onClick={addiDentity}>
                             确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -212,7 +275,7 @@ function UserIndex(props){
                             />,
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" className={styles.eve} onClick={setQuan} htmlType="submit">
                             确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -221,8 +284,8 @@ function UserIndex(props){
                 </div>
             </div>
             {/* 第四个 */}
-            <div className={styles.cont_Item}>
-                <div className={styles.top}> 
+            <div className={styles.cont_Item2}>
+                <div className={styles.top2}> 
                     <Button  className={styles.color}>添加视图接口权限</Button>
                 </div>
                 <div className={styles.upUser}>
@@ -231,7 +294,7 @@ function UserIndex(props){
                             rules: [{ required: true, message: "视图是必须得" }],
                             initialValue: "请选择视图"
                         })(
-                        <Select style={{ width: 140 }}>
+                        <Select style={{ width: 140 }} >
                             {
                                 Authhority&&Authhority.map((item)=>{
                                 return <Option key={item.view_id} value={item.view_authority_id}>{item.view_authority_text}</Option>
@@ -240,7 +303,7 @@ function UserIndex(props){
                         </Select>
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" className={styles.eve} onClick={addauthority} htmlType="submit">
                     确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -249,8 +312,8 @@ function UserIndex(props){
                 </div>
             </div>
             {/* 第五个 */}
-            <div className={styles.cont_Item}>
-                <div className={styles.top}> 
+            <div className={styles.cont_Item2}>
+                <div className={styles.top2}> 
                     <Button className={styles.color}>添加身份设置api接口权限</Button>
                 </div>
                 <div className={styles.upUser}>
@@ -282,7 +345,7 @@ function UserIndex(props){
                         </Select>
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={setIdent}>
                     确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -291,8 +354,8 @@ function UserIndex(props){
                 </div>
             </div>
             {/* 第六个 */}
-            <div className={styles.cont_Item}>
-                <div className={styles.top}> 
+            <div className={styles.cont_Item2}>
+                <div className={styles.top2}> 
                         <Button  className={styles.color}>添加身份视图接口权限</Button>
                 </div>
                 <div className={styles.upUser}>
@@ -326,7 +389,7 @@ function UserIndex(props){
                         </Select>
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary"  className={styles.eve} onClick={setIdentView} htmlType="submit">
                     确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -365,6 +428,42 @@ UserIndex.defaultProps={
         type:"makerUser/addUsers",
         payload
       })
+    },
+    addYon(payload){
+        dispatch({
+            type:"makerUser/addYon",
+            payload
+          })
+    },
+    genYon(payload){
+        dispatch({
+            type:"makerUser/genYon",
+            payload
+          })
+    },
+    setQuanxian(payload){
+        dispatch({
+            type:"makerUser/setQuanxian",
+            payload
+          })
+    },
+    addauthorityViewe(payload){
+        dispatch({
+            type:"makerUser/addauthorityViewe",
+            payload
+        })
+    },
+    setIdentityApi(payload){
+        dispatch({
+            type:"makerUser/setIdentityApi",
+            payload,
+        })
+    },
+    setIdentityView(payload){
+        dispatch({
+            type:"makerUser/setIdentityView",
+            payload,
+        })
     }
  }
 }
