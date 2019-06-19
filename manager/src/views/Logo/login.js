@@ -62,7 +62,7 @@ function LoginPage(props){
       <a className="login-form-forgot" href="">
         Forgot password
       </a>
-      <Button type="primary" htmlType="submit" className="login-form-button">
+      <Button type="primary" htmlType="submit" className="">
         Log in
       </Button>
       Or <a href="">register now!</a>

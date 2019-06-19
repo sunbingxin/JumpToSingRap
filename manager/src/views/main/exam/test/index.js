@@ -115,7 +115,7 @@ function Look(props) {
         </Layout>
     )
     function btn(){
-      searchget({exam_id:select2});
+      searchget({exam_id:select2,questions_type_id:select3});
     }
 }
 class MyTag extends React.Component {

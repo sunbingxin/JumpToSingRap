@@ -12,20 +12,24 @@ function MenuItem(props){
     title={
       <span>
         <Icon type="user" />
-        {props.intl.formatMessage({id: 'router.questions'})}
+        {props.intl.formatMessage({id: 'router.exam'})}
       </span>
     }
   >
     <Menu.Item key="1">
     <Link to="/exam/add">
-      {props.intl.formatMessage({id: 'router.questions.add'})}
+    {props.intl.formatMessage({id: 'router.exam.add'})}
     </Link>
     </Menu.Item>
     <Menu.Item key="2">
-    <Link to="/exam/classify">{props.intl.formatMessage({id: 'router.questions.type'})}</Link>
+    <Link to="/exam/classify">
+    {props.intl.formatMessage({id: 'router.exam.classify'})}
+    </Link>
     </Menu.Item>
     <Menu.Item key="3">
-    <Link to="/exam/test">{props.intl.formatMessage({id: 'router.questions.view'})}</Link>
+    <Link to="/exam/test">
+    {props.intl.formatMessage({id: 'router.exam.test'})}
+    </Link>
     </Menu.Item>
   </SubMenu>
 
@@ -79,6 +83,19 @@ function MenuItem(props){
     <Link to="/class/student">学生管理</Link>
     </Menu.Item>
   </SubMenu>
+  <SubMenu
+    title={
+      <span>
+        <Icon type="user" />
+        阅卷管理
+      </span>
+    }
+  >
+    <Menu.Item key="8">
+    <Link to="/paper/classlist">待批班级</Link>
+    </Menu.Item>
+  </SubMenu>
 </Menu>
 } 
-export default injectIntl(MenuItem);
+
+export default injectIntl(MenuItem)

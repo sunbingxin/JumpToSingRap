@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
-import { Typography,Radio ,Table, Divider, Tag,Input,Select ,Button} from 'antd';
+import { Typography ,Table,Input,Select ,Button} from 'antd';
 import style from './index.css'
 const { Title } = Typography;
 const { Option } = Select;
