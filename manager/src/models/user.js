@@ -142,7 +142,7 @@ export default {
         return { ...state, data:payload.code===1?payload.exam:[]};
       },
       examExamss(state,{payload}){
-        return {...state,objAll:payload.code===1?payload.exam:[]};
+        return {...state,objAll:payload.code===1?payload.exam:[],strAoo:payload.exam};
       },
       isExam(state,{payload}){
         return {...state,objAll:undefined};
