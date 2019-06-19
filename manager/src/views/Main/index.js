@@ -42,6 +42,7 @@ function IndexPage(props) {
            </div> 
        </Header>
        <div className={styles.center}>
+       <button onClick={()=>props.changeLocal(props.locale==='zh'?'en':'zh')}>{props.locale==='zh'?'中文':'英文'}</button>
        <Sider style={{height:"100%"}}>
          <Menuitem></Menuitem>
         </Sider>
@@ -71,8 +72,22 @@ function IndexPage(props) {
   </Layout>
 }
 
-let mapStateToProps=state=>{
-  return {...state.loading}
+const mapStateToProps = state=>{
+  console.log('state..', state);
+  return {
+    loading: state.loading.global,
+    locale: state.global.locale
+  }
 }
 
-export default connect(mapStateToProps)(IndexPage);
+const mapDispatchToProps = dispatch=>{
+  return {
+    changeLocal: payload=>{
+      dispatch({
+        type: 'global/changeLocale',
+        payload
+      })
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);

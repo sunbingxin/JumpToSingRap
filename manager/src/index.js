@@ -24,7 +24,7 @@ app.use(createLoading());
  app.model(require('./models/makerUser').default);
  app.model(require('./models/class').default);
  app.model(require('./models/show').default);
-
+ app.model(require('./models/global').default);
 // 4. Router
 app.router(require('./router').default);
 
