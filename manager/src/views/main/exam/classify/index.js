@@ -41,7 +41,7 @@ function IndexPage(props) {
   },[isArr,isChoos,isCode])
   return  <Layout style={{ padding: '0 24px 24px' }}>
   <Breadcrumb style={{ margin: '16px 0' }}>
-    <Breadcrumb.Item>试题分类</Breadcrumb.Item>
+    <Breadcrumb.Item >试题分类</Breadcrumb.Item>
   </Breadcrumb>
   <Content
     style={{
@@ -51,7 +51,7 @@ function IndexPage(props) {
       minHeight: 280,
     }}
   >
-    <Button type="primary" icon="plus" onClick={()=>{
+    <Button style={{ margin: '5px 0' }}  type="primary" icon="plus" onClick={()=>{
       setState(true)
     }}>
       添加类型

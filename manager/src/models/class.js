@@ -1,4 +1,4 @@
-import {getGtade,getSubject,getRoom,addGtade,delClass,addRoom,gradUpdata} from "../services"
+import {getGtade,getSubject,getRoom,addGtade,delClass,addRoom,gradUpdata,delrooms} from "../services"
 export default {
     // 命名空间
     namespace: 'class',
@@ -37,6 +37,10 @@ export default {
       *gradUpdata({payload},{call,put}){
         let data=yield call(gradUpdata,payload);
         console.log(data);//更新
+      },
+      *delroom({payload},{call,put}){
+        let data=yield call(delrooms,payload);
+        yield put({type:"deleRoom",payload:data})
       }
     },
   
@@ -57,6 +61,9 @@ export default {
       deleClass(state,{payload}){
         return {...state,isDele:payload.code===1?true:false};
     },
+    deleRoom(state,{payload}){
+      return {...state}
+    }
     },
   
   };

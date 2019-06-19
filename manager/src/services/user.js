@@ -63,7 +63,6 @@ export function searChget(params){
 }
 
 export function addTextAll(params){
-  console.log(params);
  return request({
    url:"/exam/insertQuestionsType?text="+params.text+"&sort="+params.sort,
    method:"GET",
@@ -71,8 +70,14 @@ export function addTextAll(params){
 }
 
 export function ExamDetail(params) {
-  console.log(params)
   return request({
     url:'/exam/exam?exam_exam_id=' + params.exam_exam_id,
   })
+}
+
+export function examExams(payload){
+ return request({
+   url:"/exam/exam",
+   data:payload,
+ })
 }

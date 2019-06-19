@@ -62,7 +62,7 @@ function IndexPage(props) {
         minHeight: 280,
       }}
    >
-   <Button type="primary" icon="plus" onClick={()=>{
+   <Button style={{ margin: '5px 0' }}  type="primary" icon="plus" onClick={()=>{
       setXian(false);
       setChoose(true);
       setCheckOne(false);

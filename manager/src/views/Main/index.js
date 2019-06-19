@@ -19,6 +19,9 @@ import Show from './User/show/index'
 
 import Markinglists from './Marking/lists/index'
 import ExamDetail from './Marking/ExamDetail/index'
+import MarkingAdd from './Marking/add/index'
+import Adddetil from './Marking/Adddetil/index'
+
 import Student from './Class/student/index'
 const { Header,Sider } = Layout;
 const { Option } = Select;
@@ -52,18 +55,17 @@ function IndexPage(props) {
            <Route path="/exam/detail" component={Detail}></Route>
            <Route path="/exam/classify" component={Classify}></Route>
            <Route path="/exam/test" component={Test}></Route>
+           <Route path="/exam/ExamDetail" component={ExamDetail}></Route>
 
            <Route path="/user/adduser" component={Adduser}></Route>
            <Route path="/user/show" component={Show}></Route>
 
+           <Route path="/marking/Adddetil" component={Adddetil}></Route>
+           <Route path="/marking/add" component={MarkingAdd}></Route>
+           <Route path="/marking/lists" component={Markinglists}></Route>
+        
            <Route path="/class/classmanage" component={ClassManage}></Route> 
            <Route path="/class/teammanage" component={Teammanage}></Route>  
-           <Route path="/class/studmange" component={null}></Route>
-
-           
-           <Route path="/marking/add" component={null}></Route>
-           <Route path="/marking/lists" component={Markinglists}></Route>
-           <Route path="/exam/ExamDetail" component={ExamDetail}></Route>
            <Route path="/class/student" component={Student}></Route>
            </Switch>
           </div>

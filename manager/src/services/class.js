@@ -21,6 +21,14 @@ export function getRoom(){
     }) 
 }
 
+export function delrooms(payload){
+    return request({
+        url:"/manger/room/delete",
+        method:"DELETE",
+        data:payload
+    })
+}
+
 export function addGtade(payload){
     return request({
         url:"/manger/grade",
