@@ -5,22 +5,27 @@ import style from './index.css'
 const { Title } = Typography;
 const { Option } = Select;
 function ClassStudent(props) {
-    let {Getstudent} = props
+    let {Getstudent,getGrade} = props
     let [data,setdata] = useState([])
+    let [room,setroom] = useState([])
+    let [alass,setclass] = useState([])
+    let [arr,setarr] = useState([])
     let [val,setval] = useState('')
+    let [select1,setselect1] = useState('')
+    let [select2,setselect2] = useState('')
+
+
     useEffect(function(){
-        if(props.show.data){
+        if(props.show.data&&props.class.classData){
             setdata(props.show.data.action)
+            setarr(props.show.data.action)
+            setroom(props.class.roomData)
+            setclass(props.class.classData)
         }else{
             Getstudent()
+            getGrade()
         }
     },[props.show.data])
-    function onChange1(){
-        console.log('1')
-    }
-    function onChange2(){
-        console.log('1')
-    }
     let columns = [
         {
             render: (text) =>(
@@ -40,42 +45,66 @@ function ClassStudent(props) {
     return <div className={style.userBox}>
         <Title level={3}>学生管理</Title>
         <div className={style.flex}>
-            <Input placeholder="Basic usage" onChange={(e)=>{
+            <Input placeholder="Basic usage" value={val} onChange={(e)=>{
                 setval(e.target.value)
             }} />
             <Select
                 style={{ width: 200 }}
                 placeholder="Select a person"
-                optionFilterProp="children"
-                onChange={onChange1}
+                value={select1}
+                onChange={(e)=>{
+                    console.log(e)
+                    setselect1(e)
+                }}
             >
                 {
-                    console.log(props.user.styleExam1)
-                }
-                {
-                    
-                    props.user.styleExam1&&props.user.styleExam1.map((item,index)=>{
-                        return <Option value="jack">{item.exam_name}</Option>
+                    room&&room.map((item,index)=>{
+                        return <Option value={item.room_text}>{item.room_text}</Option>
                     })
                 }
             </Select>,
             <Select
                 style={{ width: 200 }}
                 placeholder="Select a person"
-                optionFilterProp="children"
-                onChange={onChange2}
+                value={select2}
+                onChange={(e)=>{
+                    console.log(e)
+                    setselect2(e)
+                }}
             >
                 {
-                    props.user.styleExam2&&props.user.styleExam2.map((item,index)=>{
-                        return <Option value="jack">{item.subject_text}</Option>
+                    alass&&alass.map((item,index)=>{
+                        return <Option value={item.grade_name}>{item.grade_name}</Option>
                     })
                 }
                 
             </Select>,
             <Button type="primary" onClick={()=>{
+                console.log(select1,select2,val,arr)
+                let obj = [];
+                if(val){
+                    // console.log(obj)
+                    let v = arr.find(item=>{
+                        return item.student_name === val
+                    })
+                    if(v){
+                        obj.push(v)
+                    }
+                    setdata(obj)
+                }else if(select1){
+                    setdata(arr.filter(item=>item.room_text == select1))
+                }else if(select2){
+                    setdata(arr.filter(item=>item.grade_name == select2))
+                }else{
+                    setdata(arr)
+                }
                 
             }}>搜索</Button>
-            <Button type="primary">重置</Button>
+            <Button type="primary" onClick={()=>{
+                setselect1('')
+                setselect2('')
+                setval('')
+            }}>重置</Button>
         </div>
         <div>
             <div className={style.top}>
@@ -117,6 +146,11 @@ const mapDisaptchToProps = dispatch=>{
         dispatch({
             type:'show/delstudent',
             payload
+        })
+    },
+    getGrade(){
+        dispatch({
+          type:"class/gtade", //获取班级展示
         })
     }
   }
