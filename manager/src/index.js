@@ -21,6 +21,7 @@ app.use(createLoading());
 
 // 3. Model
  app.model(require('./models/user').default);
+ app.model(require('./models/global').default);
  app.model(require('./models/makerUser').default);
  app.model(require('./models/class').default);
  app.model(require('./models/show').default);

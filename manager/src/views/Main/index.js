@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useState}from 'react';
 import { connect } from 'dva';
-import { Layout, Menu,Spin } from 'antd';
+import { Layout, Menu,Spin ,Select } from 'antd';
 import styles from  "./index.css"
 import {Route,Switch} from 'dva/router';
 
@@ -16,19 +16,19 @@ import Adduser from "./User/addUser/index"
 import ClassManage from "./Class/classManage/index"
 import Teammanage from "./Class/teammanage/index"
 import Show from './User/show/index'
-import Markingadd from './Marking/add/index'
+
 import Markinglists from './Marking/lists/index'
 import ExamDetail from './Marking/ExamDetail/index'
 import Student from './Class/student/index'
-
-
 const { Header,Sider } = Layout;
-
+const { Option } = Select;
 function IndexPage(props) {
   let {global}=props;
+  console.log(props.locale);
   return <Layout style={{display:'flex',flexDirection: "column",width:"100%",height:"100%"}}>
        <Header className={styles.minHeard}>
         <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt=""/>
+        <button onClick={()=>props.changeLocal(props.locale==='zh'?'en':'zh')}>{props.locale==='zh'?'中文':'英文'}</button> 
          <div>
              <img src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
              chenmanjie
@@ -72,7 +72,20 @@ function IndexPage(props) {
 }
 
 let mapStateToProps=state=>{
-  return {...state.loading}
+  return {
+    global:state.loading.global,
+    locale:state.global.locale,
+  }
 }
 
-export default connect(mapStateToProps)(IndexPage);
+let mapDispatchToProps = dispatch=>{
+  return {
+    changeLocal: payload=>{
+      dispatch({
+        type: 'global/changeLocale',
+        payload
+      })
+    }
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(IndexPage);
