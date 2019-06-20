@@ -78,6 +78,7 @@ export function ExamDetail(params) {
 export function examExams(payload){
  return request({
    url:"/exam/exam",
+   method:"POST",
    data:payload,
  })
 }

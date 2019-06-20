@@ -1,41 +1,39 @@
 import React ,{useEffect,useState} from 'react';
 import { connect } from 'dva';
-import {Layout, Breadcrumb,Button} from 'antd';
+import {Layout, Breadcrumb,Button,Drawer} from 'antd';
 import styles from "./index.css"
 import { JsxEmit } from 'typescript';
+
+import TextIndex from "../../Exam/test";
 const { Content } = Layout;
 
 function IndexPage(props) {
-  let arr=[];
   let [arrItem,setArrItem]= useState([]);
-  let {strAoo,getAll,strAll} =props;
-  if(strAoo){
-   let str= JSON.parse(strAoo[0].question_ids)
-   strAll&&strAll.forEach(item=>{
-      str.forEach(val=>{
-        if(val===item.questions_id){
-          arr.push(item);
-        }
-      })
-   })
-  
-   arrItem=arrItem.concat(arr)
-  }else{
-    props.history.push(`/marking/add`)
-  }
+  let [visible,setVisible]= useState(false);
+  let {strAoo,getAll} =props;
+  useEffect(()=>{
+    if(strAoo){
+      setArrItem(strAoo);
+      console.log(strAoo);
+    }else{
+      props.history.push(`/marking/add`)
+    }
+  },[strAoo])
   let title= decodeURIComponent(props.history.location.search.split("=")[1])
   useEffect(()=>{
     getAll();
   },[])
-  let Handlebars=ind=>{
-    arrItem.splice(ind,1);
-    setArrItem(arrItem);
+  function showDrawer(){
+    setVisible(true);
+  }
+  function onClose(){
+    setVisible(false);
   }
   return  <Layout style={{ padding: "24px"  }}>
   <Breadcrumb style={{padding: "10px 0px"}}>
     <Breadcrumb.Item>创建试卷</Breadcrumb.Item>
   </Breadcrumb>
-  <Button style={{width:'100px', margin:"0px 0 5px -2px"}} >添加新题</Button>
+  <Button style={{width:'100px', margin:"0px 0 5px -2px"}} onClick={showDrawer} >添加新题</Button>
   <Content
     style={{
       background: '#fff',
@@ -52,7 +50,9 @@ function IndexPage(props) {
     arrItem&&arrItem.map((item,index)=><div key={index} className={styles.boxCent}>
       <div>
         <div>{index+1}:{item.title}</div>
-        <div onClick={()=>Handlebars(index)} >删除</div>
+        <div onClick={()=>{
+          setArrItem(arrItem.slice(index+1));
+        }} >删除</div>
       </div>
   
       <div>
@@ -64,9 +64,23 @@ function IndexPage(props) {
     </div>)
   }
   <div className={styles.butn}>
-   <Button type="primary">创建试卷</Button>
+   <Button type="primary" onClick={()=>{
+     props.history.push("/marking/lists");
+   }} >创建试卷</Button>
   </div>
-  
+    <Drawer
+      title="添加试题"
+      placement="right"
+      width={800}
+      closable={false}
+      onClose={onClose}
+      visible={visible}
+    >
+      <TextIndex istitle="true" onFun={(data)=>{
+       arrItem.push(data);
+       setArrItem(arrItem);
+      }} />
+    </Drawer>
   </Content>
 </Layout>
 }

@@ -31,6 +31,10 @@ const columns = function(props){
       key: 'action',
       render: (text, record) => (
         <span style={{position:"absolute",right:20}}>
+          {props.istitle?<a onClick={()=>{
+            props.onFun(record)
+          }} >添加</a>:null}
+          /
           <Link to={`/exam/add?id=${text.questions_id}`}>编辑</Link>
         </span>
       ),
@@ -75,7 +79,7 @@ function Look(props) {
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={{ span: 6, offset: 2 }} span={8} >
+                    <Col lg={{ span: 6, offset: 2 }} span={8}>
                         考试类型:  <Select 
                         defaultValue="" 
                         style={{ width: 120}} 

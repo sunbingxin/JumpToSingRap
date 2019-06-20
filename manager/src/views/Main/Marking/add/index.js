@@ -19,8 +19,8 @@ function IndexPage(props) {
             setVal(values.username)
             examExam({
                 title:values.username,
-                subject_id:values.usertype,
-                exam_id:values.userClass,
+                subject_id:values.userClass,
+                exam_id:values.usertype,
                 number:values.userNub,
                 start_time:start,
                 end_time:end

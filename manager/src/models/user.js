@@ -99,6 +99,7 @@ export default {
   },
   *examExam({payload},{call,put}){
     let data=yield call(examExams,payload);
+    console.log(data);
     yield put({type:"examExamss",payload:data});
     yield put({type:"isExam"});
   }
@@ -142,7 +143,7 @@ export default {
         return { ...state, data:payload.code===1?payload.exam:[]};
       },
       examExamss(state,{payload}){
-        return {...state,objAll:payload.code===1?payload.exam:[],strAoo:payload.exam};
+        return {...state,objAll:payload.code===1?payload.data.questions:[],strAoo:payload.data.questions};
       },
       isExam(state,{payload}){
         return {...state,objAll:undefined};
