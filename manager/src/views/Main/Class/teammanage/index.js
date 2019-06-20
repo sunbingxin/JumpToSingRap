@@ -4,7 +4,7 @@ import styles from  "./index.css"
 import {Layout,Breadcrumb,Button,Table,Modal,Form,Input } from "antd";
 const { Content } = Layout;
 function IndexPage(props) {
-  let {roomData,addRoom,getGrade}=props;
+  let {roomData,addRoom,getGrade,delRoom}=props;
   const columns = [
     {
       title: '教室号',
@@ -15,7 +15,9 @@ function IndexPage(props) {
       render: (text, record) => (
         <span>
           <a onClick={()=>{
-           
+           delRoom({
+            room_id:record.room_id
+           })
           }} >删除</a>
         </span>
       ),
@@ -38,7 +40,7 @@ function IndexPage(props) {
         minHeight: 280,
       }}
    >
-   <Button type="primary" icon="plus" onClick={()=>{
+   <Button style={{ margin: '5px 0' }}  type="primary" icon="plus" onClick={()=>{
       setChoose(true)
     }}>
       添加教室
@@ -89,6 +91,13 @@ let mapDispatchToProps=dispatch=>{
         type:"class/gtade", //获取班级展示
       })
     },
+    ///manger/room/delete
+    delRoom(payload){
+      dispatch({
+        type:"class/delroom",
+        payload,
+      })
+    }
        
     }
   }

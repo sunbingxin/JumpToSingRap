@@ -5,7 +5,6 @@ const { SubMenu } = Menu;
 function MenuItem(props){
   return <Menu
   mode="inline"
-  defaultSelectedKeys={['1']}
   style={{ height: '100%' }}
 >
   <SubMenu
@@ -34,19 +33,22 @@ function MenuItem(props){
   </SubMenu>
 
   <SubMenu
-    key="sub2"
     title={
       <span>
         <Icon type="user" />
-        用户管理
+        {props.intl.formatMessage({id: 'router.user'})}
       </span>
     }
   >
     <Menu.Item key="4">
-    <Link to="/user/adduser">添加用户</Link>
+    <Link to="/user/adduser">
+    {props.intl.formatMessage({id: 'router.user.adduser'})}
+    </Link>
     </Menu.Item>
     <Menu.Item key="5">
-    <Link to="/user/show">用户管理</Link>
+    <Link to="/user/show">
+    {props.intl.formatMessage({id: 'router.user.show'})}
+    </Link>
     </Menu.Item>
   </SubMenu>
 
@@ -54,33 +56,43 @@ function MenuItem(props){
     title={
       <span>
         <Icon type="user" />
-        考试管理
+        {props.intl.formatMessage({id: 'router.marking'})}        
       </span>
     }
   >
     <Menu.Item key="6">
-    <Link to="/marking/add">添加考试</Link>
+    <Link to="/marking/add">
+    {props.intl.formatMessage({id: 'router.marking.add'})}
+    </Link>
     </Menu.Item>
     <Menu.Item key="7">
-    <Link to="/marking/lists">考试列表</Link>
+    <Link to="/marking/lists">
+    {props.intl.formatMessage({id: 'router.marking.lists'})}
+    </Link>
     </Menu.Item>
   </SubMenu>
   <SubMenu
     title={
       <span>
         <Icon type="user" />
-        班级管理
+        {props.intl.formatMessage({id: 'router.class'})} 
       </span>
     }
   >
     <Menu.Item key="11">
-    <Link to="/class/classmanage">班级管理</Link>
+    <Link to="/class/classmanage">
+    {props.intl.formatMessage({id: 'router.class.classmanage'})} 
+    </Link>
     </Menu.Item>
     <Menu.Item key="22">
-     <Link to="/class/teammanage">教室管理</Link>
+     <Link to="/class/teammanage">
+    {props.intl.formatMessage({id: 'router.class.teammanage'})}       
+     </Link>
     </Menu.Item>    
     <Menu.Item key="33">
-    <Link to="/class/student">学生管理</Link>
+    <Link to="/class/student">
+    {props.intl.formatMessage({id: 'router.class.student'})} 
+    </Link>
     </Menu.Item>
   </SubMenu>
   <SubMenu

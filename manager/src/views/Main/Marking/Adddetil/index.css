@@ -1,0 +1,34 @@
+.boxTop{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+.boxTop>div{
+    margin: 5px 0px;
+}
+.boxCent{
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 5px;
+}
+.boxCent>div:nth-child(1){
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.boxCent>div:nth-child(1)>div:nth-child(2){
+    color: blue;
+    cursor: pointer;
+}
+.boxCent>div:nth-child(2){
+    margin: 10px 0px;
+}
+.butn{
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-top: 10px;
+}
