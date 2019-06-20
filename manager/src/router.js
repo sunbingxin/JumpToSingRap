@@ -2,6 +2,8 @@ import React from 'react';
 import SpaMain from './views/Main/index';
 import { Router, Route, Switch } from 'dva/router';
 import Login from './views/Logo/login';
+import get404 from './views/Other/404.js';
+import get403 from './views/Other/403.js';
 import 'antd/dist/antd.css'; 
 import {connect} from "dva";
 //--------------------------------国际化
@@ -26,6 +28,8 @@ const RouterView = connect(mapStateToProps)(({locale,history})=>{
      <Router history={history}>
        <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/403" component={get403} />
+        <Route path="/404" component={get404} />
         <Route path="/" component={SpaMain} />
       </Switch>
      </Router>

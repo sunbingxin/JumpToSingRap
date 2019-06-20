@@ -1,7 +1,8 @@
 import {login,exam,addTextAll,examStyle,classStyle,uerId,
-  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams} from "../services";
+  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,userExam,newUser} from "../services";
 import {getToken,setToken} from "../utils/cookie";
 import {routerRedux} from "dva/router"
+import  allView from "../router/cofig.js";
 export default {
     // 命名空间
     namespace: 'user',
@@ -14,6 +15,9 @@ export default {
       styleExam2:[],
       styleExam3:[],
       obj:{},
+      viewAuthority: [],  // 用户所拥有的视图权限
+      myView: [],  // 拥有权限的前端路由
+      forbiddenView: [] //没有权限访问的路由
     },
   
     subscriptions: {
@@ -24,6 +28,10 @@ export default {
               dispatch(routerRedux.replace({
                 pathname:`/login?redirect=${encodeURIComponent(pathname)}`, 
               }))
+             }else{
+               dispatch({
+                 type:"userinfo"
+               })
              }
           }else{
              if(getToken()){
@@ -45,7 +53,6 @@ export default {
         }
         yield put({ type: 'save' , payload:data.code===1?1:-1});
     },
-
     *exam({ payload },{ call, put }){  //获取试题类型的
       let data = yield call(exam);
       yield put({type:"examSave",payload:data})
@@ -102,8 +109,17 @@ export default {
     console.log(data);
     yield put({type:"examExamss",payload:data});
     yield put({type:"isExam"});
+  },
+  *userinfo({payload},{call,put}){
+    let data=yield call(userExam);
+    yield put({type: 'updateUserInfo',payload: data.data})
+
+    let userId=data.data.user_id
+    let newData=yield call(newUser,userId);
+
+    yield put({type: 'updateViewAuthority',payload: newData.data })
   }
-    },
+ },
     // 同步操作
     reducers: {
       save(state, {payload}) {
@@ -147,6 +163,27 @@ export default {
       },
       isExam(state,{payload}){
         return {...state,objAll:undefined};
+      },
+      updateUserInfo(state, {payload}){
+        return {...state, userInfo: payload}
+      },
+      updateViewAuthority(state, {payload}){
+        // 筛选出我所有的前端路由权限
+        let myView = allView.routes,
+            forbiddenView = [];
+            
+        myView.forEach(item=>{
+          item.child = item.child.filter(value=>{
+            if (payload.findIndex(id=>id.view_id===value.id) !== -1){
+              return true;
+            }else{
+              forbiddenView.push(value.path);
+              return false;
+            }
+          })
+        })
+        console.log('myView...', myView);
+        return {...state, viewAuthority: payload, myView, forbiddenView}
       }
     },
   };

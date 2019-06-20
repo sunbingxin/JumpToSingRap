@@ -16,4 +16,7 @@ export default{
     "router.class.classmanage":"班级管理",
     "router.class.teammanage":"教室管理",
     "router.class.student":"学生管理",
+
+    "router.paper":"阅卷管理",
+    "router.paper.makers":"待批班级",
 }
