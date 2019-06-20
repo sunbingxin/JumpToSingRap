@@ -1,4 +1,4 @@
-import {userAll1,userAll2,userAll3,userAll4,userAll5,userAll6,Allstudents,Deletestu} from '../services'
+import {userAll1,userAll2,Classmate,userAll3,WaitClass,userAll4,userAll5,userAll6,Allstudents,Deletestu} from '../services'
 export default {
     // 命名空间
     namespace: 'show',
@@ -31,7 +31,27 @@ export default {
       *delstudent({payload},{call,put}){
           let data = yield call(Deletestu,payload)
           console.log(data)
-      }
+      },
+      *WaitClass({ payload }, { call, put }) {
+        let data = yield call(WaitClass);
+        yield put({
+          type: "getClass",
+          payload: data,
+  
+        })
+        console.log(data)
+      },
+      *Classmate({ payload }, { call, put }) {
+        console.log(payload)
+        let data8 = yield call(Classmate, payload);
+        console.log(data8)
+        yield put({
+          type: "getClassmate",
+          payload: data8.exam,
+  
+        })
+        // console.log(exam.exam)
+      },
     //   *fetch({ payload }, { call, put }) {  // eslint-disable-line
     //     yield put({ type: 'save' });
     //   },
@@ -44,6 +64,13 @@ export default {
       },
       student(state, action) {
         return { ...state, data:action};
+      },
+      getClass(state, { payload }) {
+        return { ...state, data7: payload.code === 1 ? payload.data : [] };
+      },
+      getClassmate(state, { payload }) {
+        // console.log(payload.code)
+        return { ...state, data8: payload };
       },
     },
   
