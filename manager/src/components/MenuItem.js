@@ -17,8 +17,8 @@ function MenuItem(props){
         </span>
       }>{
         item.child.map((value, key)=>{
-          return <Menu.Item key={value.path}>
-            <Link to={value.path}>{props.intl.formatMessage({id: value.name})}</Link>
+          return value.name&&<Menu.Item key={value.path}>
+           <Link to={value.path}>{props.intl.formatMessage({id: value.name})}</Link>
           </Menu.Item>
         })
       }
@@ -31,4 +31,4 @@ const mapStateToProps = state=>{
     myView: state.user.myView
   }
 }
-export default injectIntl(connect(mapStateToProps)(MenuItem))
+export default injectIntl(connect(mapStateToProps)(MenuItem));

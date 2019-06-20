@@ -171,7 +171,6 @@ export default {
         // 筛选出我所有的前端路由权限
         let myView = allView.routes,
             forbiddenView = [];
-            
         myView.forEach(item=>{
           item.child = item.child.filter(value=>{
             if (payload.findIndex(id=>id.view_id===value.id) !== -1){
@@ -182,7 +181,6 @@ export default {
             }
           })
         })
-        console.log('myView...', myView);
         return {...state, viewAuthority: payload, myView, forbiddenView}
       }
     },

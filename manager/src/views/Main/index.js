@@ -42,8 +42,8 @@ function IndexPage(props) {
             {/* 渲染你权限有的路由 */}
            {
             props.myView.map((item)=>{
-              if (item.children){
-                return item.children.map((value,key)=>{
+              if (item.child){
+                return item.child.map((value,key)=>{
                   return  <Route key={key} path={value.path} component={value.component}/>
                 })
               }
@@ -54,7 +54,7 @@ function IndexPage(props) {
             return <Redirect key={item} from={item} to="/403"/>
           })}
           {/* 其余的都是跳转都404 */}
-        {/* <Redirect to="/404"/> */}
+           {/* <Redirect to="/404"/> */}
            </Switch>
           </div>
        </div>

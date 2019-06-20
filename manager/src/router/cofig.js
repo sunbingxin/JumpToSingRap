@@ -44,7 +44,7 @@ export default {
                     component:Test,
                 },  //
                 {
-                    name:"router.exam.classify", //试题详情
+                    name:null, //试题详情
                     path:"/exam/detail",
                     id:"main-questionsDetail",
                     component:Detail,
@@ -61,7 +61,7 @@ export default {
                     component:Adduser,
                 },
                 {
-                    name:"router.exam.classify",  //用户管理
+                    name:null,  //用户管理
                     path:"/user/show",
                     id:"main-showUser",
                     component:Show,
@@ -84,13 +84,13 @@ export default {
                     component:Markinglists,
                 },
                 {
-                    name:"router.marking.lists",  //考试详情
+                    name:null,  //考试详情
                     path:"/exam/ExamDetail",
                     id:"main-examDetail",
                     component:ExamDetail,
                 },
                  {//main-examEdit
-                    name:"router.exam.classify", //创建试卷
+                    name:null, //创建试卷
                     path:"/marking/Adddetil",
                     id:"main-examEdit",
                     component:Adddetil,
@@ -136,7 +136,7 @@ export default {
                     component:ClassMate,
                 },
                 {
-                    name:"router.marking.lists",  //阅卷
+                    name:null,  //阅卷
                     path:"/marking/lists",
                     id:"main-examinationPapers",
                     component:ClassDetail,
