@@ -69,7 +69,7 @@ export function getExamTitle(){
 
 export function searChget(params){
   return request({
-    url:"/exam/questions/condition?exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id,
+    url:"/exam/questions/condition?exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id+"&subject_id="+params.subject_id,
     method:"GET",
   })
 }

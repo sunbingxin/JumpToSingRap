@@ -1,5 +1,6 @@
 .row{
     height: 60px;
+    display: flex;
 }
 .btn{
     margin-left: 50px;
@@ -7,9 +8,6 @@
 .table td{
     line-height: 30px;
 }
-.row .rowleft{
-    width: 10%;
-}
-.row .rowrigint{
-    width: 90%;
+.roow{
+    margin-top: -10px;
 }

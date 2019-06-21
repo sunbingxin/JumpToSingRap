@@ -36,6 +36,7 @@
 .mainMenu{
     display: none;
     position: absolute;
+    z-index: 9999;
     width: 100%;
     top: 65px;
     left: 0px;

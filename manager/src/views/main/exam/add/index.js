@@ -49,17 +49,16 @@ function IndexPage(props) {
       minHeight: 280,
     }}
   >
-  <h4>题目信息</h4>
-  <h4>题干</h4>
-  <Input placeholder="请输入题目标题,不超过20个字" defaultValue={arr?arr.title:account} onInput={(e)=>{
+  <h4 className={styles.divItem}>题目信息</h4>
+  <h4 className={styles.divItem}>题干</h4>
+     <Input placeholder="请输入题目标题,不超过20个字"  className={styles.divItem} defaultValue={arr?arr.title:account}  onInput={(e)=>{
     setAccount(e.target.value)
   }} />
-  <div className={styles.editor}>
-  <Editor value={arr?arr.questions_stem:value1} onChange={(e)=>{
+ 
+  <Editor className={styles.divItem} value={arr?arr.questions_stem:value1} height={200} onChange={(e)=>{
     setvalue1(e)
    }} />
-  </div>
-  <div>
+  <div className={styles.divItem}>
   <h4>请选择考试类型:</h4>
    <Select style={{ width: 120}}  defaultValue={arr?arr.exam_name:select1} onChange={(e)=>{
       setSelect1(e);
@@ -69,7 +68,7 @@ function IndexPage(props) {
    }
    </Select>
   </div>
-  <div>
+  <div className={styles.divItem}>
   <h4>请选择课程类型:</h4>
    <Select style={{ width: 120}} defaultValue={arr?arr.subject_text:select2} onChange={(e)=>{
       setSelect2(e);
@@ -79,7 +78,7 @@ function IndexPage(props) {
    }
    </Select>
   </div>
-  <div>
+  <div className={styles.divItem}>
   <h4>请选择题目类型:</h4>
    <Select style={{ width: 120}}  defaultValue={arr?arr.questions_type_text:select3} onChange={(e)=>{
       setSelect3(e);
@@ -89,13 +88,14 @@ function IndexPage(props) {
    }
    </Select>
   </div>
-  <div className={styles.editor}>
-  <Editor value={arr?arr.questions_answer:value2} onChange={(e)=>{
+  <Editor className={styles.divItem} value={arr?arr.questions_answer:value2} height={200} onChange={(e)=>{
     setvalue2(e)
   }}/>
-  </div>
+ 
 
-  <Button type="primary" onClick={()=>{
+  <Button type="primary"
+   className={styles.divItem} 
+  onClick={()=>{
     let object={
       questions_type_id:select3,
       questions_stem:value1,

@@ -119,13 +119,13 @@ function UserIndex(props){
             {/* 第一个 */}
             <div className={styles.cont_Item}>
                 <div className={styles.top}>
-                    <Button  className={styles.color} onClick={()=>{
+                    <Button className={userVal?styles.color:styles.color1} onClick={()=>{
                         upShowVal(false);
                         upShowuser(true)
                     }} >
                         添加用户
                     </Button>
-                    <Button onClick={()=>{
+                    <Button className={userVal?styles.color1:styles.color} onClick={()=>{
                     upShowVal(true);
                     upShowuser(false);
                     }} >

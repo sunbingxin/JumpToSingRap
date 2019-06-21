@@ -39,7 +39,7 @@ function IndexPage(props) {
           { global? <div className={styles.spin}> <Spin /></div>:null}
           <Switch>
 
-           <Redirect exact  from="/" to="/exam/add"/> 
+           <Redirect exact from="/" to="/exam/add"/>
             {/* 渲染你权限有的路由 */}
            {
             props.myView.map((item)=>{

@@ -3,6 +3,7 @@ import {Menu, Icon } from 'antd';
 import {connect} from 'dva';
 import {injectIntl} from 'react-intl'
 const { SubMenu } = Menu;
+const data=["user","alipay","android","apple","github"]
 function MenuItem(props){
   return <Menu
   theme="dark"
@@ -12,7 +13,7 @@ function MenuItem(props){
 {props.myView.map((item, index)=>{
       return <SubMenu key={item.name} title={
         <span>
-           <Icon type="user" />
+           <Icon type={data[index]} />
             {props.intl.formatMessage({id: item.name})}
         </span>
       }>{
