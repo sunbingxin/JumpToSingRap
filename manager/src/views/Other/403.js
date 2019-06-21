@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-export default ()=>{
-  return <p>403</p>
+export default class get403 extends Component {
+  render() {
+    return (
+      <div>
+        <img src="../../../public/404.jpg" alt=""/>
+      </div>
+    )
+  }
 }
+
  
  

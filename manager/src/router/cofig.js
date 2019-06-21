@@ -1,25 +1,56 @@
-import Add from "../views/Main/Exam/add/index"
-import Classify from "../views/Main/Exam/classify/index"     //考试管理
-import Test from "../views/Main/Exam/test/index"
-import Detail from "../views/Main/Exam/detail/index"
-
-//------------------------------------------------------
-import Adduser from "../views/Main/User/addUser/index"
-import Show from '../views/Main/User/show/index'
-//-------------------------------------------------------
-import ClassManage from "../views/Main/Class/classManage/index"
-import Teammanage from "../views/Main/Class/teammanage/index"
-import Student from '../views/Main/Class/student/index'
-
-import Markinglists from '../views/Main/Marking/lists/index'
-import ExamDetail from '../views/Main/Marking/ExamDetail/index'
-import MarkingAdd from '../views/Main/Marking/add/index'
-import Adddetil from '../views/Main/Marking/Adddetil/index'
-
-import ClassList from '../views/Main/Paper/classlist/index'
-import ClassMate from '../views/Main/Paper/classmate/index'
-import ClassDetail from '../views/Main/Paper/detail/index'
-
+import dynamic from 'dva/dynamic';
+const Add = dynamic({
+    component: () => import('../views/Main/Exam/add/index'),
+});
+const Classify = dynamic({
+    component: () => import('../views/Main/Exam/classify/index'),
+});
+const Test = dynamic({
+    component: () => import('../views/Main/Exam/test/index'),
+});
+const Detail = dynamic({
+    component: () => import('../views/Main/Exam/detail/index'),
+});
+//----------------------------------------------------------------
+const Adduser = dynamic({
+    component: () => import("../views/Main/User/addUser/index"),
+});
+const Show = dynamic({
+    component: () => import('../views/Main/User/show/index'),
+});
+//------------------------------------------------------------------
+const ClassManage = dynamic({
+    component: () => import('../views/Main/Class/classManage/index'),
+});
+const Teammanage = dynamic({
+    component: () => import('../views/Main/Class/teammanage/index'),
+});
+const Student = dynamic({
+    component: () => import('../views/Main/Class/student/index'),
+});
+//------------------------------------------------------------------
+const Markinglists = dynamic({
+    component: () => import('../views/Main/Marking/lists/index'),
+});
+const ExamDetail = dynamic({
+    component: () => import('../views/Main/Marking/ExamDetail/index'),
+});
+const MarkingAdd = dynamic({
+    component: () => import('../views/Main/Marking/add/index'),
+});
+const Adddetil = dynamic({
+    component: () => import('../views/Main/Marking/Adddetil/index'),
+});
+//------------------------------------------------------------------
+const ClassList = dynamic({
+    component: () => import('../views/Main/Paper/classlist/index'),
+});
+const ClassMate = dynamic({
+    component: () => import('../views/Main/Paper/classmate/index'),
+});
+const ClassDetail = dynamic({
+    component: () => import('../views/Main/Paper/detail/index'),
+});
 export default {
     routes:[
         {
@@ -55,13 +86,13 @@ export default {
             name:"router.user", //用户管理
             child:[
                 {
-                    name:"router.exam.add", //添加用户
+                    name:"router.user.adduser", //添加用户
                     path:"/user/adduser", 
                     id:"main-addUser",
                     component:Adduser,
                 },
                 {
-                    name:null,  //用户管理
+                    name:"router.user.show",  //用户管理
                     path:"/user/show",
                     id:"main-showUser",
                     component:Show,
@@ -130,7 +161,7 @@ export default {
                     component:ClassList,
                 },
                 {
-                    name:"router.marking.lists",  //批卷
+                    name:null,  //批卷
                     path:"/paper/classmate",
                     id:"main-examPaperClassList",
                     component:ClassMate,

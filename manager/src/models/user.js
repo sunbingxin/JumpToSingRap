@@ -110,10 +110,15 @@ export default {
     yield put({type:"examExamss",payload:data});
     yield put({type:"isExam"});
   },
-  *userinfo({payload},{call,put}){
+  *userinfo({payload},{call,put,select}){
+    let myView=yield select(state=>state.user.myView);
+    if(myView.length){
+      return true;
+    }
+
     let data=yield call(userExam);
     yield put({type: 'updateUserInfo',payload: data.data})
-
+      
     let userId=data.data.user_id
     let newData=yield call(newUser,userId);
 
@@ -181,6 +186,7 @@ export default {
             }
           })
         })
+        console.log(payload);
         return {...state, viewAuthority: payload, myView, forbiddenView}
       }
     },
