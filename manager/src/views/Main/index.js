@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Layout, Menu,Spin ,Select } from 'antd';
 import styles from  "./index.css"
 import {Route,Switch,Redirect} from 'dva/router';
-
 import Menuitem from "../../components/MenuItem"
 
 const { Header,Sider } = Layout;
@@ -27,7 +26,7 @@ function IndexPage(props) {
               <Menu.Item key="2">我的班级</Menu.Item>
               <Menu.Divider />
               <Menu.Item key="3">设置</Menu.Item>
-              <Menu.Item key="4">退出登陆</Menu.Item>
+              <Menu.Item key="4" onClick={userEnid} >退出登陆</Menu.Item>
               </Menu>
            </div> 
        </Header>
@@ -38,14 +37,13 @@ function IndexPage(props) {
           <div className={styles.mainDiv}>
           { global? <div className={styles.spin}> <Spin /></div>:null}
           <Switch>
-
-           <Redirect exact from="/" to="/exam/add"/>
             {/* 渲染你权限有的路由 */}
+            <Redirect exact from="/"  to="/exam/add"/>
            {
             props.myView.map((item)=>{
               if (item.child){
                 return item.child.map((value,key)=>{
-                  return  <Route key={key} path={value.path} component={value.component}/>
+                  return  <Route key={key}  path={value.path} component={value.component}/>
                 })
               }
             })
@@ -55,11 +53,16 @@ function IndexPage(props) {
             return <Redirect key={item} from={item} to="/403"/>
           })}
           {/* 其余的都是跳转都404 */}
-           <Redirect to="/404"/> 
+        <Redirect to="/404"/> 
            </Switch>
           </div>
        </div>
   </Layout>
+
+  function userEnid(){
+    props.clearView();
+    props.history.replace("/login");
+  }
 }
 
 let mapStateToProps=state=>{
@@ -77,6 +80,11 @@ let mapDispatchToProps = dispatch=>{
       dispatch({
         type: 'global/changeLocale',
         payload
+      })
+    },
+    clearView(){
+      dispatch({
+        type:"user/clearView"
       })
     }
   }

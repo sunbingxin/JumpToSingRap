@@ -1,6 +1,6 @@
 import {login,exam,addTextAll,examStyle,classStyle,uerId,
-  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,userExam,newUser} from "../services";
-import {getToken,setToken} from "../utils/cookie";
+  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,userExam,newUser,updataParpers} from "../services";
+import {getToken,setToken,removeToken} from "../utils/cookie";
 import {routerRedux} from "dva/router"
 import  allView from "../router/cofig.js";
 export default {
@@ -87,7 +87,10 @@ export default {
 
   *gettext({payload},{call,put}){
     let data=yield call(addTextAll,payload);
+    let dataexam = yield call(exam);
     yield put ({type:"getTextAll",payload:data})
+    yield put({type:"examSave",payload:dataexam})
+    yield put ({type:"gaiIsCode"});
   },
   
   *ExamDetail({payload},{call,put}){
@@ -123,6 +126,13 @@ export default {
     let newData=yield call(newUser,userId);
 
     yield put({type: 'updateViewAuthority',payload: newData.data })
+  },
+  *updataParper({payload},{call,put}){
+    let data=yield call(updataParpers,payload);
+    console.log(data);
+  },
+  *clearView({payload},{call,put}){
+    yield put({type:"clearQX"});
   }
  },
     // 同步操作
@@ -160,6 +170,9 @@ export default {
       getTextAll(state,{payload}){
         return {...state,isCode:payload.code===1?1:-1}
       },
+      gaiIsCode(state,{payload}){
+        return {...state,isCode:0}
+      },
       ExamDeta(state, {payload}) {
         return { ...state, data:payload.code===1?payload.exam:[]};
       },
@@ -188,6 +201,10 @@ export default {
         })
         console.log(payload);
         return {...state, viewAuthority: payload, myView, forbiddenView}
+      },
+      clearQX(state,actions){
+        removeToken();
+        return {...state, viewAuthority: [], myView:[],forbiddenView:[]}
       }
     },
   };

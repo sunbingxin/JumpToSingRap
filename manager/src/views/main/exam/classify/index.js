@@ -5,7 +5,7 @@ import XLSX from 'xlsx';
 const { Content } = Layout;
 
 function IndexPage(props) {
-  let {addExam,isArr,isChoos,addText,isCode}=props;
+  let {addExam,isArr,addText,isCode}=props;
   let [state,setState]=useState(false);
   let [value,setValue]=useState("");
 
@@ -68,10 +68,10 @@ function IndexPage(props) {
     }
     if(isCode===1){
       message.success("添加试题类型成功")
-    }else if(isChoos===-1){
+    }else if(isCode===-1){
       message.error("添加试题类型失败")
     }
-  },[isArr,isChoos,isCode])
+  },[isArr,isCode])
   return  <Layout style={{ padding: '0 24px 24px' }}>
   <Breadcrumb style={{ margin: '16px 0' }}>
     <Breadcrumb.Item >试题分类</Breadcrumb.Item>

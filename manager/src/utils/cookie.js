@@ -8,3 +8,7 @@ export function setToken(value){
 export function getToken(){
    return Cookie.get(key)
 }
+
+export function removeToken(){
+    return Cookie.remove(key);
+}

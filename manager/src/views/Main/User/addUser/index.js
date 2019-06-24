@@ -215,7 +215,7 @@ function UserIndex(props){
                         <Button type="primary" className={styles.eve} htmlType="submit" onClick={HandAdduser}>
                             确定
                         </Button>
-                        <Button style={{marginLeft:10 }} onClick={handleReset} >
+                        <Button style={{marginLeft:10 }} onClick={handleReset}>
                             重置
                         </Button>
                     </div>:null}

@@ -4,6 +4,7 @@ import {connect} from 'dva';
 import {injectIntl} from 'react-intl'
 const { SubMenu } = Menu;
 const data=["user","alipay","android","apple","github"]
+ 
 function MenuItem(props){
   return <Menu
   theme="dark"
@@ -11,7 +12,7 @@ function MenuItem(props){
   style={{ height: '100%' }}
 >
 {props.myView.map((item, index)=>{
-      return <SubMenu key={item.name} title={
+      return item.child.length&&<SubMenu key={item.name} title={
         <span>
            <Icon type={data[index]} />
             {props.intl.formatMessage({id: item.name})}

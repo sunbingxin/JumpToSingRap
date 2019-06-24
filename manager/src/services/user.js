@@ -94,3 +94,11 @@ export function examExams(payload){
    data:payload,
  })
 }
+
+export function updataParpers(payload){
+  return request({
+    url:"/exam/exam/1buzgr-imze5s",
+    method:"PUT",
+    data:payload,
+  })
+}
