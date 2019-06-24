@@ -1,5 +1,5 @@
 import {login,exam,addTextAll,examStyle,classStyle,uerId,
-  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,userExam,newUser,updataParpers} from "../services";
+  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,userExam,newUser,updataParpers,changeImgs} from "../services";
 import {getToken,setToken,removeToken} from "../utils/cookie";
 import {routerRedux} from "dva/router"
 import  allView from "../router/cofig.js";
@@ -118,7 +118,6 @@ export default {
     if(myView.length){
       return true;
     }
-
     let data=yield call(userExam);
     yield put({type: 'updateUserInfo',payload: data.data})
       
@@ -133,6 +132,10 @@ export default {
   },
   *clearView({payload},{call,put}){
     yield put({type:"clearQX"});
+  },
+  *changeImg({payload},{call,put}){
+   let data=yield call(changeImgs,payload);
+   yield put({type:"changImg",payload:data});
   }
  },
     // 同步操作
@@ -205,7 +208,12 @@ export default {
       clearQX(state,actions){
         removeToken();
         return {...state, viewAuthority: [], myView:[],forbiddenView:[]}
+      },
+      changImg(state,{payload}){
+        console.log(payload);
+        return {...state,imgSrc:payload.data};
       }
     },
+  
   };
   

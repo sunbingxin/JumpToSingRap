@@ -102,3 +102,11 @@ export function updataParpers(payload){
     data:payload,
   })
 }
+
+export function changeImgs(payload){
+  return request({
+        method: 'POST',
+        url: 'http://123.206.55.50:11000/upload_base64',
+        data: payload
+  })
+}
