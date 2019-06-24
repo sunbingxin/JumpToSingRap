@@ -21,7 +21,10 @@ function IndexPage(props) {
              <img src={imgSrc?imgSrc.path:'http://img.zz21.com/2016/0708/20160708110124825.jpg'} alt=""/>
              chenmanjie
               <Menu className={styles.mainMenu}>
-              <Menu.Item key="1" onClick={()=>props.history.push("/personage")}>个人中心</Menu.Item>
+              <Menu.Item key="1" onClick={()=>{
+                console.log(props)
+                props.history.push('/exam/my')
+              }}>个人中心</Menu.Item>
               <Menu.Item key="2">我的班级</Menu.Item>
               <Menu.Divider />
               <Menu.Item key="3">设置</Menu.Item>

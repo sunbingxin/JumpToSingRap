@@ -1,5 +1,6 @@
 import {login,exam,addTextAll,examStyle,classStyle,uerId,
-  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,userExam,newUser,updataParpers,changeImgs} from "../services";
+  setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,appendImg,userExam,newUser,updataParpers
+,changeImgs} from "../services";
 import {getToken,setToken,removeToken} from "../utils/cookie";
 import {routerRedux} from "dva/router"
 import  allView from "../router/cofig.js";
@@ -46,6 +47,10 @@ export default {
   
     // 异步操作
     effects: {
+    *appendImg({payload},{call,put}){
+      let data = yield call(appendImg,payload)
+      yield put({type:'appen',action:data.data})
+    },
     *login({ payload },{ call, put }){
         let data = yield call(login,payload);
         if(data.code===1){
@@ -140,6 +145,9 @@ export default {
  },
     // 同步操作
     reducers: {
+      appen(state,{action}){
+        return {...state,data:action}
+      },
       save(state, {payload}) {
         return { ...state, isLoad:payload };
       },
