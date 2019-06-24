@@ -21,7 +21,7 @@ import Markinglists from './Marking/lists/index'
 import ExamDetail from './Marking/ExamDetail/index'
 import MarkingAdd from './Marking/add/index'
 import Adddetil from './Marking/Adddetil/index'
-
+import Me from '../me/index'
 import Student from './Class/student/index'
 
 import ClassList from './Paper/classlist/index'
@@ -41,7 +41,10 @@ function IndexPage(props) {
              <img src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
              chenmanjie
               <Menu className={styles.mainMenu}>
-              <Menu.Item key="1">个人中心</Menu.Item>
+              <Menu.Item key="1" onClick={()=>{
+                console.log(props)
+                props.history.push('/exam/my')
+              }}>个人中心</Menu.Item>
               <Menu.Item key="2">我的班级</Menu.Item>
               <Menu.Divider />
               <Menu.Item key="3">设置</Menu.Item>
@@ -61,6 +64,7 @@ function IndexPage(props) {
            <Route path="/exam/classify" component={Classify}></Route>
            <Route path="/exam/test" component={Test}></Route>
            <Route path="/exam/ExamDetail" component={ExamDetail}></Route>
+           <Route path="/exam/my" component={Me}></Route>
 
            <Route path="/user/adduser" component={Adduser}></Route>
            <Route path="/user/show" component={Show}></Route>

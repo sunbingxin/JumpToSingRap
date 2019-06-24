@@ -4,6 +4,7 @@ import { Typography,Radio ,Table, Divider, Tag} from 'antd';
 import style from './index.css'
 const { Title } = Typography;
 function Usershow(props) {
+  
     let {user} = props
     let [data,setdata] = useState([])
     let [username,setusername] = useState('用户数据')

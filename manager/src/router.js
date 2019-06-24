@@ -10,7 +10,8 @@ import en from 'react-intl/locale-data/en';
 import zh from 'react-intl/locale-data/zh';
 import zhCN from './lang/zh-CN.js';
 import enUS from './lang/ex-US.js';
-const localMap = {
+import Me from './views/me/index'
+ const localMap = {
   en: enUS,
   zh: zhCN
 }
@@ -27,6 +28,7 @@ const RouterView = connect(mapStateToProps)(({locale,history})=>{
        <Switch>
         <Route path="/login" component={Login} />
         <Route path="/" component={SpaMain} />
+
       </Switch>
      </Router>
   </IntlProvider>

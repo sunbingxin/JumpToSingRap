@@ -82,6 +82,14 @@ export function examExams(payload){
    data:payload,
  })
 }
+export function appendImg(payload){
+  console.log(payload)
+  return request({
+    url: 'http://123.206.55.50:11000/upload',
+    method: 'POST',
+    data: payload
+  })
+}
 /**
  * avatar: null
 description: null
