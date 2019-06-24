@@ -3,15 +3,24 @@ import { connect} from 'dva';
 function Index(props){ 
     let {imgSrc}=props;
     let [imgs,setimgs]=useState("");
+    let [canvas,setCanvas]=useState("");
     useEffect(()=>{
-        
+     
     },[imgSrc])
+    
   return <div>
       <input type="file" onChange={(e)=>updataImag(e)}/>
       {imgs&&<img style={{width:"200px",height:"200px"}} src={imgs}></img>}
       <button disabled={imgSrc?false:true} onClick={()=>{
            props.history.replace("/exam/add");
       }}>更换头像</button>
+
+     <canvas ref={ref=>{
+         setCanvas(ref);
+         changeCan();
+     }} width="200" height="200">
+     您的浏览器不支持canvas，请更换浏览器.
+     </canvas>
   </div>
   function updataImag(e){
     let files = e.target.files;
@@ -21,6 +30,10 @@ function Index(props){
         props.changeImg({base64:this.result})
     }
     reader.readAsDataURL(files[0]);
+  }
+
+  function changeCan(){
+    let cxt=canvas&&canvas.getContext('2d');
   }
 }
 let mapStateToProps=state=>{
