@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react"
 import style from "./index.css"
 import {connect} from "dva"
-import { Layout, Breadcrumb, Select, Row, Col, Button, Icon, Tag ,Table} from 'antd';
+import { Layout, Breadcrumb, Select, Row, Col, Button, Icon, Tag ,Table,Radio } from 'antd';
 import {Link} from "dva/router"
 const { Content } = Layout;
 const { Option } = Select;
@@ -33,8 +33,7 @@ const columns = function(props){
         <span style={{position:"absolute",right:20}}>
           {props.istitle?<a onClick={()=>{
             props.onFun(record)
-          }} >添加</a>:null}
-          /
+          }} >添加/</a>:null}
           <Link to={`/exam/add?id=${text.questions_id}`}>编辑</Link>
         </span>
       ),
@@ -69,16 +68,19 @@ function Look(props) {
                     overflow:'auto'
                 }}>
                 <Row className={style.row}>
-                    <Col span={6} className={style.rowleft}>课程类型:</Col>
-                    <Col span={18} className={style.rowrigint} >
-                        <div>
-                          {
-                            styleExam2&&styleExam2.map((item,index)=><MyTag key={index}>{item.subject_text}</MyTag>)
+                    <Col>课程类型:</Col>
+                    <Col style={{ marginLeft: 16 }}>
+                      <Radio.Group size="small" defaultValue="0" buttonStyle="solid">
+                          { 
+                            styleExam2&&styleExam2.map((item,index)=><Radio.Button onChange={(e)=>{
+                              setSelect1(e.target.value)
+                            }} key={index} value={item.subject_id}>{item.subject_text}</Radio.Button>)
                           }
-                        </div>
+                        </Radio.Group>
+
                     </Col>
                 </Row>
-                <Row>
+                <Row className={style.roow}>
                     <Col lg={{ span: 6, offset: 2 }} span={8}>
                         考试类型:  <Select 
                         defaultValue="" 
@@ -93,7 +95,6 @@ function Look(props) {
                   }
                 </Select>
                     </Col>
-                  
                     <Col lg={{ span: 6, offset: 2 }} span={8} >
                         题目类型:  <Select 
                         defaultValue="" 
@@ -119,7 +120,7 @@ function Look(props) {
         </Layout>
     )
     function btn(){
-      searchget({exam_id:select2,questions_type_id:select3});
+      searchget({exam_id:select2,questions_type_id:select3,subject_id:select1});
     }
 }
 class MyTag extends React.Component {

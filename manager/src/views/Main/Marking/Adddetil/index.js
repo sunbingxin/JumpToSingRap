@@ -65,7 +65,9 @@ function IndexPage(props) {
   }
   <div className={styles.butn}>
    <Button type="primary" onClick={()=>{
-     props.history.push("/marking/lists");
+    let arr = strAoo.map(item=>item.questions_id);
+    props.updataParper({question_ids:JSON.stringify(arr)})
+    props.history.push("/marking/lists");
    }} >创建试卷</Button>
   </div>
     <Drawer
@@ -98,6 +100,12 @@ let mapDispatchProps=dispatch=>{
      dispatch({
        type:"user/getExamTitle"
      })
+    },
+    updataParper(payload){
+      dispatch({
+        type:"user/updataParper",
+        payload,
+      })
     }
   }
 }

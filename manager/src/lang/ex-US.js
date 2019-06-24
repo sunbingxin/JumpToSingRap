@@ -16,4 +16,7 @@ export default{
     "router.class.classmanage":"classManagement",
     "router.class.teammanage":"TeamManagement",
     "router.class.student":"StudManagement",
+
+    "router.paper":"MarkingManagement",
+    "router.paper.makers":"ForApprovalTestPaper",
 }

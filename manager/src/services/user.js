@@ -8,6 +8,18 @@ export function login(params){
   })
 }
 
+export function userExam(){ //获取用户信息
+   return request({
+     url:"/user/userInfo"
+   })
+}
+ 
+export function newUser(user){  //获取用户权限
+  return request({
+   url:"/user/new?user_id="+user
+  })
+}
+
 export function exam(){ // 获取试题类型2
   return request({
     url:"/exam/getQuestionsType",
@@ -57,7 +69,7 @@ export function getExamTitle(){
 
 export function searChget(params){
   return request({
-    url:"/exam/questions/condition?exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id,
+    url:"/exam/questions/condition?exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id+"&subject_id="+params.subject_id,
     method:"GET",
   })
 }
@@ -113,3 +125,19 @@ title: "测试2019.03.28"
 user_id: "w6l6n-cbvl6s"
 user_name: "chenmanjie"
  */
+
+export function updataParpers(payload){
+  return request({
+    url:"/exam/exam/1buzgr-imze5s",
+    method:"PUT",
+    data:payload,
+  })
+}
+
+export function changeImgs(payload){
+  return request({
+        method: 'POST',
+        url: 'http://123.206.55.50:11000/upload_base64',
+        data: payload
+  })
+}
