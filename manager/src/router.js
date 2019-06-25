@@ -29,9 +29,9 @@ const RouterView = connect(mapStateToProps)(({locale,history})=>{
   return <IntlProvider locale={locale} messages={localMap[locale]}>
      <Router history={history}>
        <Switch>
-        <Route path="/login" component={Login} />
+        <Route path="/login" component={Login}/>
         <Route path="/personage" component={personage} />
-        <Route path="/403" component={get403} />
+        <Route path="/403" component={get403}/>
         <Route path="/404" component={get404} />
         <Route path="/" component={SpaMain} />
 

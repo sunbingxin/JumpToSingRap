@@ -141,3 +141,11 @@ export function changeImgs(payload){
         data: payload
   })
 }
+
+export function base64s(){
+  return request({
+    method:"POST",
+    url: 'http://123.206.55.50:11000/tobase64',
+    data: {url: 'http://img.redocn.com/sheji/20141219/zhongguofengdaodeliyizhanbanzhijing_3744115.jpg'}
+  })
+}

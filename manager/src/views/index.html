@@ -35,71 +35,9 @@
             ctx.drawImage(img, 0, 0, 800, 500);
         }
         ele.onchange = function (e) {
+            console.log(e);
             let files = e.target.files;
             var reader = new FileReader();
-            console.log(reader)
-            reader.onload = function () {
-                // console.log('result...', this.result);
-                axios({
-                    method: 'post',
-                    url: 'http://123.206.55.50:11000/upload_base64',
-                    data: { base64: this.result }
-                }).then(body => {
-                    console.log('body...', body.data.data.path);
-                    imgs.src = body.data.data.path
-                    imgs.onload = function () {
-                        ctx.drawImage(imgs, 0, 0, 100, 70);
-                    }
-                }).catch(e => {
-                    console.log('e..', e);
-                })
-            }
-            reader.readAsDataURL(files[0]);
-        }
-    </script>
-</body>
-
-</html>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-    <style>
-        img,
-        .imgs {
-            width: 800px;
-            height: auto;
-        }
-    </style>
-</head>
-
-<body>
-    <canvas id="myCanvas" style="width: 800px;height: 500px;border: 1px solid #ccc">
-
-    </canvas>
-    <input type="file">
-    <img class="imgs" src="" alt="">
-    <img class="img" src="http://123.206.55.50:11000/static/2d23e0fbb8cff9c0805e8c21.jpg" alt="">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-
-        var ele = document.querySelector('input');
-        var imgs = document.querySelector('.imgs');
-        var img = document.querySelector('.img');
-        img.onload = function () {
-            ctx.drawImage(img, 0, 0, 800, 500);
-        }
-        ele.onchange = function (e) {
-            let files = e.target.files;
-            var reader = new FileReader();
-            console.log(reader)
             reader.onload = function () {
                 // console.log('result...', this.result);
                 axios({

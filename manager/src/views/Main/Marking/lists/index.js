@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
-import { Select,Button,Icon,Tabs,Radio} from 'antd';
+import { Select,Button,Icon,Radio} from 'antd';
 import styles from './index.css'
 const { Option } = Select;
 
@@ -13,6 +13,7 @@ function QuesList(props) {
     })
 
     function onChange(e){
+      console.log(e.target.value);
       newSize({
         data:e.target.value
       })
@@ -91,8 +92,6 @@ function QuesList(props) {
     </div>
     )
   }
-
-
   // props的类型检查
   QuesList.propTypes = {
 

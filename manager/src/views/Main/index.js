@@ -23,12 +23,12 @@ function IndexPage(props) {
               <Menu className={styles.mainMenu}>
               <Menu.Item key="1" onClick={()=>{
                 console.log(props)
-                props.history.push('/exam/my')
+                props.history.push('/personage')
               }}>个人中心</Menu.Item>
               <Menu.Item key="2">我的班级</Menu.Item>
               <Menu.Divider />
               <Menu.Item key="3">设置</Menu.Item>
-              <Menu.Item key="4" onClick={userEnid} >退出登陆</Menu.Item>
+              <Menu.Item key="4" onClick={userEnid}>退出登陆</Menu.Item>
               </Menu>
            </div> 
        </Header>

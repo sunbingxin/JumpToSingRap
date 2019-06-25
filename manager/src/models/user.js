@@ -1,6 +1,6 @@
 import {login,exam,addTextAll,examStyle,classStyle,uerId,
   setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,appendImg,userExam,newUser,updataParpers
-,changeImgs} from "../services";
+,changeImgs,base64s} from "../services";
 import {getToken,setToken,removeToken} from "../utils/cookie";
 import {routerRedux} from "dva/router"
 import  allView from "../router/cofig.js";
@@ -18,7 +18,9 @@ export default {
       obj:{},
       viewAuthority: [],  // 用户所拥有的视图权限
       myView: [],  // 拥有权限的前端路由
-      forbiddenView: [] //没有权限访问的路由
+      forbiddenView: [], //没有权限访问的路由
+      srcImg:0,
+      imgSrc:0,
     },
   
     subscriptions: {
@@ -141,6 +143,13 @@ export default {
   *changeImg({payload},{call,put}){
    let data=yield call(changeImgs,payload);
    yield put({type:"changImg",payload:data});
+   yield put({type:"setchangImg"})
+  },
+  //
+  *base64({payload},{call,put}){
+    let data=yield call(base64s);
+    yield put({type:"base64ss",payload:data.data.base64})
+    yield put({type:"setbase64ss"})
   }
  },
     // 同步操作
@@ -218,8 +227,16 @@ export default {
         return {...state, viewAuthority: [], myView:[],forbiddenView:[]}
       },
       changImg(state,{payload}){
-        console.log(payload);
         return {...state,imgSrc:payload.data};
+      },
+      setchangImg(state,{payload}){
+        return {...state,imgSrc:0};
+      },
+      base64ss(state,{payload}){
+        return {...state,srcImg:payload};
+      },
+      setbase64ss(state,{payload}){
+        return {...state,srcImg:0};
       }
     },
   
