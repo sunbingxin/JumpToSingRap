@@ -4,6 +4,7 @@ import {login,exam,addTextAll,examStyle,classStyle,uerId,
 import {getToken,setToken,removeToken} from "../utils/cookie";
 import {routerRedux} from "dva/router"
 import  allView from "../router/cofig.js";
+import Cookie  from "js-cookie";
 export default {
     // 命名空间
     namespace: 'user',
@@ -143,13 +144,10 @@ export default {
   *changeImg({payload},{call,put}){
    let data=yield call(changeImgs,payload);
    yield put({type:"changImg",payload:data});
-   yield put({type:"setchangImg"})
   },
-  //
   *base64({payload},{call,put}){
     let data=yield call(base64s);
     yield put({type:"base64ss",payload:data.data.base64})
-    yield put({type:"setbase64ss"})
   }
  },
     // 同步操作
@@ -219,7 +217,6 @@ export default {
             }
           })
         })
-        console.log(payload);
         return {...state, viewAuthority: payload, myView, forbiddenView}
       },
       clearQX(state,actions){
@@ -227,16 +224,11 @@ export default {
         return {...state, viewAuthority: [], myView:[],forbiddenView:[]}
       },
       changImg(state,{payload}){
+        Cookie.set("imgSrc",payload.data.path,{expires:7})
         return {...state,imgSrc:payload.data};
-      },
-      setchangImg(state,{payload}){
-        return {...state,imgSrc:0};
       },
       base64ss(state,{payload}){
         return {...state,srcImg:payload};
-      },
-      setbase64ss(state,{payload}){
-        return {...state,srcImg:0};
       }
     },
   

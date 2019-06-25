@@ -146,6 +146,6 @@ export function base64s(){
   return request({
     method:"POST",
     url: 'http://123.206.55.50:11000/tobase64',
-    data: {url: 'http://img.redocn.com/sheji/20141219/zhongguofengdaodeliyizhanbanzhijing_3744115.jpg'}
+    data: {url: 'http://www.dadajiasu.com/uploads/allimg/180511/19-1P511145359254.jpg'}
   })
 }
