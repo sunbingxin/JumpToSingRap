@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
 import { Select,Button,Icon,Tabs,Radio} from 'antd';
 import styles from './index.css'
+import { parse } from 'querystring';
 const { Option } = Select;
 
 function handleChange(value) {
@@ -11,6 +12,8 @@ function QuesList(props) {
     let [size,newSize] = React.useState({
         data:'全部'
     })
+    let [data,setdata] = useState([])
+    let [arr,setarr] = useState([])
 
     function onChange(e){
       newSize({
@@ -18,16 +21,16 @@ function QuesList(props) {
       })
     };
 
-  useState(()=>{
-   
-  },[])
   useEffect(()=>{
     let {examType,allQue} = props;
     examType()
-    allQue()
-    console.log(props)
-
-  }, []);
+    if(!props.data){
+      allQue()
+    }else{
+      setdata(props.data)
+      setarr(props.data)
+    }
+  }, [props.data]);
     return (<div className={styles.content}>
         <span>试卷列表</span><br/>
         <div className={styles.top}>
@@ -51,9 +54,30 @@ function QuesList(props) {
             <div className={styles.shang}>
                 <span>试卷列表</span>
                 <Radio.Group value={size.data} onChange={onChange} style={{ marginBottom: 16 }} className={styles.ding}>
-                    <Radio.Button value="全部">全部</Radio.Button>
-                    <Radio.Button value="进行中">进行中</Radio.Button>
-                    <Radio.Button value="已结束">已结束</Radio.Button>
+                    <Radio.Button value="全部" onClick={()=>{
+                      setdata(arr)
+                    }}>全部</Radio.Button>
+                    <Radio.Button value="未开始" onClick={()=>{
+                      setdata(arr.filter(item=>{
+                        if(item.start_time*1 > new Date()*1){
+                          return item
+                        }
+                      }))
+                    }}>未开始</Radio.Button            >
+                    <Radio.Button value="进行中" onClick={()=>{
+                      setdata(arr.filter(item=>{
+                        if(item.start_time*1 < new Date()*1 && new Date()*1  < item.end_time*1){
+                          return item
+                        }
+                      }))
+                    }}>进行中</Radio.Button>
+                    <Radio.Button value="已结束" onClick={()=>{
+                      setdata(arr.filter(item=>{
+                        if(item.end_time*1 < new Date()*1){
+                          return item
+                        }
+                      }))
+                    }}>已结束</Radio.Button>
                 </Radio.Group>
             </div>
             <div className={styles.xia}>
@@ -67,7 +91,7 @@ function QuesList(props) {
                 </ul>
             </div>
             {
-              props.data && props.data.map((item,index) =><div className={styles.every} key={index}>
+              data[0] && data.map((item,index) =><div className={styles.every} key={index}>
               <ul>
                 <li>{item.title}</li>
                 <li>

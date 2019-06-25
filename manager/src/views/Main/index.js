@@ -4,6 +4,7 @@ import { Layout, Menu,Spin ,Select } from 'antd';
 import styles from  "./index.css"
 import {Route,Switch,Redirect} from 'dva/router';
 import Menuitem from "../../components/MenuItem"
+import Me from '../me/index'
 const { Header,Sider } = Layout;
 const { Option } = Select;
 function IndexPage(props) {
@@ -50,6 +51,7 @@ function IndexPage(props) {
               }
             })
           }
+          <Route path='/exam/my' component={Me}></Route>
             {/* 权限没有的路由 就跳转到403*/}
            {props.forbiddenView.map((item)=>{
             return <Redirect key={item} from={item} to="/403"/>

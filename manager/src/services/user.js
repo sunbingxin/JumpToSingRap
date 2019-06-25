@@ -33,7 +33,13 @@ export function examStyle(){  //获取考试类型3
      method:"GET",
   })
 }
-
+export function base(payload){
+  return request({
+    method: 'POST',
+    url: 'http://123.206.55.50:11000/upload_base64',
+    data: payload
+  })
+}
 export function classStyle(){ //获取所有的课程
   return request({
     url:"/exam/subject",

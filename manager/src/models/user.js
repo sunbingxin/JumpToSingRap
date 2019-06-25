@@ -1,6 +1,6 @@
 import {login,exam,addTextAll,examStyle,classStyle,uerId,
   setExamId,getExamTitle,searChget,allQuestion,ExamDetail,examExams,appendImg,userExam,newUser,updataParpers
-,changeImgs} from "../services";
+,changeImgs,base} from "../services";
 import {getToken,setToken,removeToken} from "../utils/cookie";
 import {routerRedux} from "dva/router"
 import  allView from "../router/cofig.js";
@@ -141,6 +141,10 @@ export default {
   *changeImg({payload},{call,put}){
    let data=yield call(changeImgs,payload);
    yield put({type:"changImg",payload:data});
+  },
+  *base({payload},{call,put}){
+    let data = yield call(base,payload)
+    console.log(data)
   }
  },
     // 同步操作
